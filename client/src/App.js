@@ -24,6 +24,8 @@ import Menu from "./components/Layout/Menu";
 import Orders from "./pages/Orders";
 import CreateBranch from "./pages/Admin/CreateBranch";
 import AllInvoice from "./pages/Manager/AllInvoice";
+import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
+import CreateRoom from "./pages/Manager/CreateRoom";
 function App() {
   return (
     <>
@@ -47,7 +49,9 @@ function App() {
         <Route path="/dashboard" element={<ManagerRoute />}>
           <Route path="manager" element={<MangerDashboard />} />
           <Route path="manager/create-category" element={<CreateCategory />} />
+          <Route path="manager/create-room-category" element={<CreateRoomCategory/>} />
           <Route path="manager/create-food" element={<CreateFood />} />
+          <Route path="manager/create-room" element={<CreateRoom/>} />
           <Route path="manager/food/:slug" element={<UpdateFood />} />
           <Route path="manager/allInvoice" element={<AllInvoice />} />
         </Route>

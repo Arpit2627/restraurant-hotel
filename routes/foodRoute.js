@@ -9,7 +9,7 @@ import {
   getFoodController,
   getSingleFoodController,
   searchOrderController,
-  updateFoodController,
+  updateFoodController, 
 } from "../controllers/foodController.js";
 
 const router = express.Router();

@@ -5,6 +5,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import ManagerProfile from "./ManagerProfile.js";
 import CreateCategory from "./CreateCategory";
+import CreateRoomCategory from "./CreateRoomCategory";
+import CreateRoom from "./CreateRoom";
 import CreateFood from "./CreateFood";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { HiDocumentReport } from "react-icons/hi";
@@ -74,6 +76,8 @@ const ManagerDashboard = () => {
     { name: "Reports", id: "ReportsId" },
     { name: "OnlineReports", id: "OnlineReportsId" },
     { name: "GraphReport", id: "GraphReportId" },
+    { name: "CreateRoom", id: "CreateRoomId" },
+    { name: "CreateRoomCategory", id: "CreateRoomCategoryId" },
     { name: "Logout", id: "logoutId" },
   ];
   const handleMenuItemClick = (itemId) => {
@@ -200,6 +204,58 @@ const ManagerDashboard = () => {
 
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               Dashboard
+            </span>
+          </li>
+          <li
+            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
+            onClick={() => {
+              handleMenuItemClick("CreateRoomId");
+              setOpen(!open);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Add Room
+            </span>
+          </li>
+          <li
+            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
+            onClick={() => {
+              handleMenuItemClick("CreateRoomCategoryId");
+              setOpen(!open);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Add Room Category
             </span>
           </li>
           <li
@@ -718,6 +774,9 @@ const ManagerDashboard = () => {
             {selectedContent === "OnlineReportsId" && <OnlineReports />}
             {selectedContent === "GraphReportId" && <GraphReport />}
             {selectedContent === "vat" && <AttendanceRecord />}
+            {selectedContent === "CreateRoomId" && <CreateRoom/>}
+            {selectedContent === "CreateRoomCategoryId" && <CreateRoomCategory/>}
+            {selectedContent === "attendance" && <Attendance />}
             {selectedContent === "attendance" && <Attendance />}
           </main>
         </div>
