@@ -150,7 +150,7 @@ const CreateRoomSubCategory = () => {
                         text-gray-100 rounded-full ring-2 ring-blue-200 px-6 py-2 
                         hover:bg-white hover:text-gray-400 hover:ring-slate-300"
                         onClick={() => {
-                          setVisible(true);
+                           setVisible(true);
                           setUpdatedName(c.name);
                           setSelected(c);
                           setOpen(true); // Open the modal
