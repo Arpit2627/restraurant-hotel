@@ -2,7 +2,7 @@ import categoryModel from "../models/roomCatModel.js";
 import slugify from "slugify";
 export const createRoomCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name } = req.body ;
     if (!name) {
       return res.status(401).send({ message: "Name is required" });
     }

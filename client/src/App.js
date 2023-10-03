@@ -27,11 +27,13 @@ import AllInvoice from "./pages/Manager/AllInvoice";
 import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
 import CreateRoom from "./pages/Manager/CreateRoom";
 import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
+import HotelRoom from "./components/Layout/HotelRoom";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/hotel" element={<HotelRoom />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/menu" element={<Menu />} />
