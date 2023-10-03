@@ -26,6 +26,7 @@ import CreateBranch from "./pages/Admin/CreateBranch";
 import AllInvoice from "./pages/Manager/AllInvoice";
 import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
 import CreateRoom from "./pages/Manager/CreateRoom";
+import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
 function App() {
   return (
     <>
@@ -50,6 +51,7 @@ function App() {
           <Route path="manager" element={<MangerDashboard />} />
           <Route path="manager/create-category" element={<CreateCategory />} />
           <Route path="manager/create-room-category" element={<CreateRoomCategory/>} />
+          <Route path="manager/create-room-Subcategory" element={<CreateRoomSubcategory/>} />
           <Route path="manager/create-food" element={<CreateFood />} />
           <Route path="manager/create-room" element={<CreateRoom/>} />
           <Route path="manager/food/:slug" element={<UpdateFood />} />

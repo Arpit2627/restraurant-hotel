@@ -23,6 +23,7 @@ import Attendance from "./Attendance";
 import AttendanceRecord from "./AttendaceRecord";
 import OnlineReports from "./OnilineReports";
 import { useNavigate } from "react-router-dom";
+import CreateRoomSubCategory from "./CreateRoomSubcategory";
 
 const ManagerDashboard = () => {
   const [auth, setAuth] = useAuth();
@@ -78,6 +79,7 @@ const ManagerDashboard = () => {
     { name: "GraphReport", id: "GraphReportId" },
     { name: "CreateRoom", id: "CreateRoomId" },
     { name: "CreateRoomCategory", id: "CreateRoomCategoryId" },
+    { name: "CreateRoomSubCategory", id: "CreateRoomSubCategoryId" },
     { name: "Logout", id: "logoutId" },
   ];
   const handleMenuItemClick = (itemId) => {
@@ -256,6 +258,32 @@ const ManagerDashboard = () => {
 
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               Add Room Category
+            </span>
+          </li>
+          <li
+            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
+            onClick={() => {
+              handleMenuItemClick("CreateRoomSubCategoryId");
+              setOpen(!open);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Add SubCategory of Room
             </span>
           </li>
           <li
@@ -776,7 +804,7 @@ const ManagerDashboard = () => {
             {selectedContent === "vat" && <AttendanceRecord />}
             {selectedContent === "CreateRoomId" && <CreateRoom/>}
             {selectedContent === "CreateRoomCategoryId" && <CreateRoomCategory/>}
-            {selectedContent === "attendance" && <Attendance />}
+            {selectedContent === "CreateRoomSubCategoryId" && <CreateRoomSubCategory/>}
             {selectedContent === "attendance" && <Attendance />}
           </main>
         </div>
