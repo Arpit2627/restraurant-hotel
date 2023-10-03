@@ -152,7 +152,7 @@ const CreateRoomSubCategory = () => {
                         onClick={() => {
                           setVisible(true);
                           setUpdatedName(c.name);
-                          setSelected(c);
+                           setSelected(c);
                           setOpen(true); // Open the modal
                         }}
                       >
