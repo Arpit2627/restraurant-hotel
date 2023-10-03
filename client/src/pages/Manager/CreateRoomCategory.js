@@ -13,7 +13,7 @@ const CreateRoomCategory = () => {
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(""); 
   const navigate = useNavigate();
   const cancelButtonRef = useRef(null);
   const handleSubmit = async (e) => {

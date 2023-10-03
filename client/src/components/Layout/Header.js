@@ -38,6 +38,12 @@ const Header = () => {
   };
 
   const navigation = [
+    {
+      name: "Rooms",
+      to: "/hotel",
+      current: true,
+      classes: "text-red-500 font-bold bg-black text-white",
+    },
     { name: "Home", to: "/", current: true },
     { name: "Menu", to: "/menu", current: true },
     { name: "Login", to: "/login", current: true },
@@ -45,7 +51,10 @@ const Header = () => {
   ];
 
   const afterNavigation = [
+    { name: "Room", to: "/hotel", current: true,classes:'text-red-500 font-bold bg-black text-white' },
+
     { name: "Home", to: "/", current: true },
+
 
     { name: "Menu", to: "/menu", current: true },
     {
@@ -99,14 +108,11 @@ const Header = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch  sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to="/">
-                      <img
-                        className="h-8 w-auto"
-                        src="/image/EV.png"
-                      />
+                      <img className="h-8 w-auto" src="/image/EV.png" />
                     </Link>
                   </div>
                 </div>
-
+<Link to="/hotel"></Link>
                 <div className="hidden sm:ml-6 sm:block">
                   {!auth?.user ? (
                     <div className="flex space-x-4">
@@ -115,8 +121,9 @@ const Header = () => {
                           key={item.name}
                           to={item.to}
                           className={classNames(
-                            item.current ? " text-black" : "text-black",
-                            "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 hover:text-black transition-colors duration-300"
+                            item.current ? "text-black" : "text-black",
+                            "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 hover:text-black transition-colors duration-300",
+                            item.classes 
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -133,7 +140,8 @@ const Header = () => {
                           to={item.to}
                           className={classNames(
                             item.current ? " text-black" : "text-black",
-                            "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 hover:text-black transition-colors duration-300"
+                            "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 hover:text-black transition-colors duration-300",
+                            item.classes
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -144,13 +152,12 @@ const Header = () => {
                   )}
                 </div>
 
+
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <Link to="/login"></Link>
-
                   {/* Profile dropdown */}
                   <Link to="/cart">
-                   <Menu as="div" className="relative ml-3">
-                   
+                    <Menu as="div" className="relative ml-3">
                       <div>
                         <Menu.Button className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
@@ -174,8 +181,7 @@ const Header = () => {
                           {cart?.length}
                         </span>
                       </div>
-                    
-                   </Menu>
+                    </Menu>
                   </Link>
                 </div>
               </div>
