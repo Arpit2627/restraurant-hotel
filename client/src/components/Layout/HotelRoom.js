@@ -60,6 +60,7 @@ function HotelRoom() {
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
     const [roomType, setRoomType] = useState('');
+    const [roomTypeAc, setRoomTypeAc] = useState('');
     const [roomCount, setRoomCount] = useState(1);
     const [guestCount, setGuestCount] = useState(1);
     const [open, setOpen] = useState(false)
@@ -198,10 +199,10 @@ function HotelRoom() {
     <label className="mr-4">
       <input
         type="radio"
-        name="roomType"
+        name="roomTypeAc"
         value="AC"
-        checked={roomType === "AC"}
-        onChange={() => setRoomType("AC")}
+        checked={roomTypeAc === "AC"}
+        onChange={() => setRoomTypeAc("AC")}
         className="mr-2"
       />
       AC
@@ -209,10 +210,10 @@ function HotelRoom() {
     <label>
       <input
         type="radio"
-        name="roomType"
+        name="roomTypeAc"
         value="Non-AC"
-        checked={roomType === "Non-AC"}
-        onChange={() => setRoomType("Non-AC")}
+        checked={roomTypeAc === "Non-AC"}
+        onChange={() => setRoomTypeAc("Non-AC")}
         className="mr-2"
       />
       Non-AC
@@ -241,7 +242,7 @@ function HotelRoom() {
       <input
         type="radio"
         name="roomType"
-        value="Non-AC"
+        value="Double bed"
         checked={roomType === "Double-bed"}
         onChange={() => setRoomType("Double-bed")}
         className="mr-2"
