@@ -19,11 +19,13 @@ import Bills from "./Bills";
 import Reports from "./Reports";
 import GraphReport from "./GraphReport";
 import AllOrders from "./AllOrders";
+
 import Attendance from "./Attendance";
 import AttendanceRecord from "./AttendaceRecord";
 import OnlineReports from "./OnilineReports";
 import { useNavigate } from "react-router-dom";
 import CreateRoomSubCategory from "./CreateRoomSubcategory";
+import AllRoom from "./AllRoom";
 
 const ManagerDashboard = () => {
   const [auth, setAuth] = useAuth();
@@ -74,6 +76,7 @@ const ManagerDashboard = () => {
     { name: "Point of Sale", id: "pointOfSaleId" },
     { name: "Create Food", id: "createFoodId" },
     { name: "All Food", id: "allFoodId" },
+    { name: "All Room", id: "allRoomId" },
     { name: "Reports", id: "ReportsId" },
     { name: "OnlineReports", id: "OnlineReportsId" },
     { name: "GraphReport", id: "GraphReportId" },
@@ -234,6 +237,38 @@ const ManagerDashboard = () => {
               Add Room
             </span>
           </li>
+
+
+
+
+          <li
+            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
+            onClick={() => {
+              handleMenuItemClick("allRoomId");
+              setOpen(!open);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              All Room
+            </span>
+          </li>
+
+
           <li
             className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
             onClick={() => {
@@ -797,6 +832,7 @@ const ManagerDashboard = () => {
             {selectedContent === "customerId" && <AllCostomer />}
             {selectedContent === "staffDetailsId" && <AllStaff />}
             {selectedContent === "allFoodId" && <AllFood />}
+            {selectedContent === "allRoomId" && <AllRoom />}
             {selectedContent === "pointOfSaleId" && <PointOfSale />}
             {selectedContent === "ReportsId" && <Reports />}
             {selectedContent === "OnlineReportsId" && <OnlineReports />}

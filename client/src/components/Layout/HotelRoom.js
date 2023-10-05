@@ -1,59 +1,61 @@
-import React, { useState,Fragment,useRef} from 'react';
+import React, { useState,Fragment,useRef, useEffect} from 'react';
 import { Dialog, Transition } from "@headlessui/react";
 import Layout from "./Layout";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 
-
-const hotels = [
-  {
-    name: "Hotel A",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fseoimgak.mmtcdn.com%2Fblog%2Fsites%2Fdefault%2Ffiles%2Fimages%2FJaisalkot.jpg&f=1&nofb=1&ipt=e9231278956e56776a082f2d01ca29583fb314af388c6175707e5b053a1bb785&ipo=images",
-    description: "My first hotel",
-    price: 1500,
-    button: "Book",
-  },
-  {
-    name: "Hotel B",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.oyoroomscdn.com%2Fuploads%2Fhotel_image%2F7129%2F5dfa5d6171aab747.jpg&f=1&nofb=1&ipt=e9f8f1c98d1e36a015141e671e34f2804afcdd0b40d6cd8e7f016cc318398559&ipo=images",
-    description: "Second hotel",
-    price: 1000,
-    button: "Book",
-  },
-  {
-    name: "Hotel C",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-    description: "Third hotel",
-    price: 2000,
-    button: "Book",
-  },
-  {
-    name: "Hotel D",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-    description: "Third hotel",
-    price: 2000,
-    button: "Book",
-  },
-  {
-    name: "Hotel E",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-    description: "Third hotel",
-    price: 2000,
-    button: "Book",
-  },
-  {
-    name: "Hotel F",
-    image:
-      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-    description: "Third hotel",
-    price: 2000,
-    button: "Book",
-  },
-];
+// const hotels = [
+//   {
+//     name: "Hotel A",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fseoimgak.mmtcdn.com%2Fblog%2Fsites%2Fdefault%2Ffiles%2Fimages%2FJaisalkot.jpg&f=1&nofb=1&ipt=e9231278956e56776a082f2d01ca29583fb314af388c6175707e5b053a1bb785&ipo=images",
+//     description: "My first hotel",
+//     price: 1500,
+//     button: "Book",
+//   },
+//   {
+//     name: "Hotel B",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.oyoroomscdn.com%2Fuploads%2Fhotel_image%2F7129%2F5dfa5d6171aab747.jpg&f=1&nofb=1&ipt=e9f8f1c98d1e36a015141e671e34f2804afcdd0b40d6cd8e7f016cc318398559&ipo=images",
+//     description: "Second hotel",
+//     price: 1000,
+//     button: "Book",
+//   },
+//   {
+//     name: "Hotel C",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
+//     description: "Third hotel",
+//     price: 2000,
+//     button: "Book",
+//   },
+//   {
+//     name: "Hotel D",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
+//     description: "Third hotel",
+//     price: 2000,
+//     button: "Book",
+//   },
+//   {
+//     name: "Hotel E",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
+//     description: "Third hotel",
+//     price: 2000,
+//     button: "Book",
+//   },
+//   {
+//     name: "Hotel F",
+//     image:
+//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
+//     description: "Third hotel",
+//     price: 2000,
+//     button: "Book",
+//   },
+// ];
 
 function HotelRoom() {
 
@@ -64,36 +66,114 @@ function HotelRoom() {
     const [roomCount, setRoomCount] = useState(1);
     const [guestCount, setGuestCount] = useState(1);
     const [open, setOpen] = useState(false)
+    const [rooms, setRooms] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     const cancelButtonRef = useRef(null)
 
     const handleBooking = () => {
-        setOpen(true);
-
+      setOpen(true);
+      
     };
-  
+    const getAllCategory = async () => {
+      try {
+        const { data } = await axios.get("/api/v1/roomcategory/get-room-category");
+        if (data?.success) {
+          setCategory(data.category);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong in getting category");
+      }
+    };
 
-
+    useEffect(()=>{
+      getAllCategory();
+      
+    },[])
+    
+    const getAllRooms=async()=>{
+      try {
+        const {data}=await axios.get("/api/v1/room/get-rooms");
+        if(data?.success){
+          setRooms(data.room)
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong in getting rooms");
+      }
+    }
+    
+    useEffect(()=>{
+      getAllRooms()
+      
+    },[])
+    
+    const handleCategoryClick = (categoryId) => {
+      setSelectedCategory(categoryId);
+    };
+    
+    
+    
   return (
     <Layout>
+{/*  */}
+          {/* Categories Section */}
+          <div className="col-span-3">
+            <h2 className="text-2xl font-semibold mb-4 mt-20">Categories</h2>
+            <div className="flex flex-wrap justify-center gap-4">
+            {category?.map((c) => (
+                <div
+                  key={c._id}
+                  className={`col-md-4 mt-5 mb-3 gx-3 gy-3 category ${
+                    selectedCategory === c._id ? "category-active" : ""
+                  }`}
+                  onClick={() => handleCategoryClick(c._id)}
+                >
+                  <div className="card bg-light bg-gradient">
+                    <Link
+                      // to={`/category/${c.slug}`}
+                      className="btn p-4"
+                      style={{
+                        background: "#fff",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                        transition: "background 0.3s, box-shadow 0.3s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.background = "#99aab5")
+                      }
+                      onMouseOut={(e) => (e.target.style.background = "#fff")}
+                    >
+                      {c.name}
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+{/*  */}
       <div className="my-20">
-        <h1 className="text-3xl font-semibold mb-6">Welcome to Hotel Booking</h1>
+        <h1 className="text-3xl font-semibold mb-6">Welcome to Hotel
+         Booking</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {hotels.map((hotel, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg p-4">
-              <img
-                src={hotel.image}
+        {rooms
+
+        .map((h) => (
+            <div key={h._id} className="bg-white shadow-lg rounded-lg p-4">
+              {/* <img
+                // src={h.image}
                 className="w-full h-40 object-cover rounded-t-lg"
-                alt={hotel.name}
-              />
+                alt={h.name}
+              /> */}
               <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
-                <p className="text-gray-600 mb-4">{hotel.description}</p>
+                <p className="text-gray-600 mb-4">{h.description}</p>
                 <p className="text-lg font-semibold text-indigo-700 mb-2">
-                  Price: ${hotel.price}
+                  Price: ₹ {h.price}
                 </p>
                 <button className="bg-teal-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300" onClick={() => handleBooking()}>
-                  {hotel.button}
+                  Book Now
                 </button>
               </div>
             </div>
@@ -194,62 +274,45 @@ function HotelRoom() {
 
 
       <div className="mb-4">
-  <label className="block font-medium text-gray-700">Room Type:</label>
   <div className="flex items-center">
-    <label className="mr-4">
-      <input
-        type="radio"
-        name="roomTypeAc"
-        value="AC"
-        checked={roomTypeAc === "AC"}
-        onChange={() => setRoomTypeAc("AC")}
-        className="mr-2"
-      />
-      AC
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="roomTypeAc"
-        value="Non-AC"
-        checked={roomTypeAc === "Non-AC"}
-        onChange={() => setRoomTypeAc("Non-AC")}
-        className="mr-2"
-      />
-      Non-AC
-    </label>
-  </div>
+  <label htmlFor="roomTypeAc" className="block font-medium text-gray-700 p-2">
+    Room Type:
+  </label>
+  <select
+    name="roomTypeAc"
+    id="roomTypeAc"
+    value={roomTypeAc}
+    onChange={(e) => setRoomTypeAc(e.target.value)}
+    className="border border-gray-300 px-2 py-1 rounded-lg"
+  >
+    <option value="AC">AC</option>
+    <option value="Non-AC">Non-AC</option>
+  </select>
+</div>
+
 </div>
 
 
 
 <div className="mb-4">
-<label className="block font-medium text-gray-700">Bed Type:</label>
+  <div className="flex items-center">
+  <label htmlFor="roomTypeBed" className="block font-medium text-gray-700 p-2">
+    Bed Type:
+  </label>
 
 <div className="flex items-center">
-    <label className="mr-4">
-      <input
-        type="radio"
-        name="roomType"
-        value="Single bed"
-        checked={roomType === "Single bed"}
-        onChange={() => setRoomType("Single bed")}
-        className="mr-2"
-      />
-      Single-Bed
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="roomType"
-        value="Double bed"
-        checked={roomType === "Double-bed"}
-        onChange={() => setRoomType("Double-bed")}
-        className="mr-2"
-      />
-      Double-Bed
-    </label>
-  </div>
+<select
+  name="roomType"
+  value={roomType}
+  onChange={(e) => setRoomType(e.target.value)}
+  className="border border-gray-300 px-2 py-1 rounded-lg"
+>
+  <option value="Single bed">Single-Bed</option>
+  <option value="Double bed">Double-Bed</option>
+</select>
+</div>
+</div>
+
 </div>
 
       <button

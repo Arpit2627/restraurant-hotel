@@ -13,6 +13,8 @@ import billsRoute from "./routes/billsRoute.js";
 import atRoute from "./routes/atRoute.js";
 import roomcategoryRoutes from "./routes/roomcategoryRoutes.js"
 import roomsubcategoryRoutes from "./routes/roomsubcategoryRoute.js"
+import roomRoute from "./routes/roomRoute.js"
+
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -44,6 +46,7 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/roomcategory", roomcategoryRoutes);
 app.use("/api/v1/roomsubcategory", roomsubcategoryRoutes);
 app.use("/api/v1/food", foodRoutes);
+app.use("/api/v1/room",roomRoute)
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/bills", billsRoute);

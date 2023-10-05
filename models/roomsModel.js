@@ -16,9 +16,25 @@ description:{
     required:true
 },
 
+category: {
+    type: mongoose.ObjectId,
+    ref: "RoomCategory",
+    required: true,
+  },
 
+  subcategory: {
+    type: mongoose.ObjectId,
+    ref: "RoomSubCategory",
+    required: true,
+  },
 
+  
+//   photo: {
+//     data: Buffer,
+//     contentType: String,
+//   },
+},
+{ timestamps: true }
 
-}
 )
 export default mongoose.model("Rooms", roomSchema);

@@ -28,6 +28,7 @@ import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
 import CreateRoom from "./pages/Manager/CreateRoom";
 import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
 import HotelRoom from "./components/Layout/HotelRoom";
+import AllRoom from "./pages/Manager/AllRoom";
 function App() {
   return (
     <>
@@ -56,6 +57,7 @@ function App() {
           <Route path="manager/create-room-Subcategory" element={<CreateRoomSubcategory/>} />
           <Route path="manager/create-food" element={<CreateFood />} />
           <Route path="manager/create-room" element={<CreateRoom/>} />
+          <Route path="manager/allroom" element={<AllRoom/>} />
           <Route path="manager/food/:slug" element={<UpdateFood />} />
           <Route path="manager/allInvoice" element={<AllInvoice />} />
         </Route>
