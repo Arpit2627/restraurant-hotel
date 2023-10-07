@@ -78,8 +78,9 @@ export const getRoomController = async (req, res) => {
 
 export const updateRoomController = async (req, res) => {
   try {
-    const { price, quantity, description, category, subcategory } = req.fields;
-    // const { photo } = req.files;
+    const { price, quantity, description, category, subcategory } = req.body;
+    const id=req.params.rid;
+    console.log(id);
     //validation
     switch (true) {
       case !price:
@@ -92,25 +93,19 @@ export const updateRoomController = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !subcategory:
         return res.status(500).send({ error: "SubCategory is Required" });
-    //   case photo && photo.size > 1000000:
-    //     return res
-    //       .status(500)
-    //       .send({ error: "photo is Required and should be less then 1mb" });
     }
-    const rooms = await roomsModel.findByIdAndUpdate(
-      req.params.rid,
-      { ...req.fields },
-      { new: true }
-    );
-    // if (photo) {
-    //   foods.photo.data = fs.readFileSync(photo.path);
-    //   foods.photo.contentType = photo.type;
-    // }
-    await rooms.save();
+    const room = await roomsModel.findByIdAndUpdate(id, {
+      price,
+      quantity,
+      description,
+      category,
+      subcategory,
+    });
+
     res.status(201).send({
       success: true,
       message: "Room Updated Successfully",
-      rooms,
+      room,
     });
   } catch (error) {
     console.log(error);

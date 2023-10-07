@@ -5,34 +5,29 @@ const roomSchema= new mongoose.Schema(
 
 price:{
     type:String,
-    required:true
+    // required:true
 },
 quantity:{
     type:Number,
-    required:true
+    // required:true
 },
 description:{
     type:String,
-    required:true
+    // required:true
 },
 
 category: {
     type: mongoose.ObjectId,
     ref: "RoomCategory",
-    required: true,
+    // required: true,
   },
 
   subcategory: {
     type: mongoose.ObjectId,
     ref: "RoomSubCategory",
-    required: true,
+    // required: true,
   },
 
-  
-//   photo: {
-//     data: Buffer,
-//     contentType: String,
-//   },
 },
 { timestamps: true }
 

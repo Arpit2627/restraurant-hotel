@@ -10,11 +10,13 @@ export const createSubCategoryController = async (req, res) => {
     if (!parentCategory) {
       return res.status(400).send({ message: "Parent Category is required" });
     }
-    const existingCategory = await Subcategorymodel.findOne({ name });
+    const existingCategory = await Subcategorymodel.findOne({parentCategory});
+
     if (existingCategory) {
       return res.status(201).send({
         success: true,
         message: "Sub Category Already Exists",
+        existingCategory
       });
     }
     const subCategory = await new Subcategorymodel({

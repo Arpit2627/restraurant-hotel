@@ -6,56 +6,6 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 
-// const hotels = [
-//   {
-//     name: "Hotel A",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fseoimgak.mmtcdn.com%2Fblog%2Fsites%2Fdefault%2Ffiles%2Fimages%2FJaisalkot.jpg&f=1&nofb=1&ipt=e9231278956e56776a082f2d01ca29583fb314af388c6175707e5b053a1bb785&ipo=images",
-//     description: "My first hotel",
-//     price: 1500,
-//     button: "Book",
-//   },
-//   {
-//     name: "Hotel B",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.oyoroomscdn.com%2Fuploads%2Fhotel_image%2F7129%2F5dfa5d6171aab747.jpg&f=1&nofb=1&ipt=e9f8f1c98d1e36a015141e671e34f2804afcdd0b40d6cd8e7f016cc318398559&ipo=images",
-//     description: "Second hotel",
-//     price: 1000,
-//     button: "Book",
-//   },
-//   {
-//     name: "Hotel C",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-//     description: "Third hotel",
-//     price: 2000,
-//     button: "Book",
-//   },
-//   {
-//     name: "Hotel D",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-//     description: "Third hotel",
-//     price: 2000,
-//     button: "Book",
-//   },
-//   {
-//     name: "Hotel E",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-//     description: "Third hotel",
-//     price: 2000,
-//     button: "Book",
-//   },
-//   {
-//     name: "Hotel F",
-//     image:
-//       "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.architecturaldigest.com%2Fphotos%2F55e79238302ba71f3017ec4e%2Fmaster%2Fpass%2Fdam-images-travel-2015-heritage-hotels-boutique-heritage-hotels-india-04.jpg&f=1&nofb=1&ipt=33526080071fb4c81f50c272252e5f91fb6c1f05fa700ddd2f40efca2c3b3f79&ipo=images",
-//     description: "Third hotel",
-//     price: 2000,
-//     button: "Book",
-//   },
-// ];
 
 function HotelRoom() {
 

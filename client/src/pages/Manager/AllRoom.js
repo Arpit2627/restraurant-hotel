@@ -3,27 +3,27 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AiOutlineCamera } from "react-icons/ai"; // Import the camera icon
+import { AiOutlineCamera } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function AllRoom() {
   const params = useParams();
   const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
-  // const [photo, setPhoto] = useState("");
+  const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  // const [photo, setPhoto] = useState("");
   const [subcategory, setSubCategory] = useState("");
   const [subcategories, setSubCategories] = useState([]);
   const [open, setOpen] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [id, setId] = useState("");
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
   const cancelButtonRef = useRef(null);
 
-  const handleBooking = () => {
+  const handleBooking = (room) => {
+    setSelectedRoom(room);
     setOpen(true);
   };
 
@@ -56,8 +56,8 @@ function AllRoom() {
       toast.error("Something went wrong in getting category");
     }
   };
-  console.log(category,"idididi");
-    const getAllSubCategory = async () => {
+
+  const getAllSubCategory = async () => {
     try {
       const { data } = await axios.get(
         `/api/v1/roomsubcategory/get-sub-category/${category}`
@@ -71,61 +71,66 @@ function AllRoom() {
 
   useEffect(() => {
     getAllCategory();
-    getSingleRoom();
   }, []);
-  useEffect(()=>{
-    getAllSubCategory();
-  },[category])
 
-  const getSingleRoom = async () => {
-    try {
-      const { data } = await axios.get(`/api/v1/room/get-rooms/${params.slug}`);
-      //   setName(data.food.name);
-      setId(data.room._id);
-      setPrice(data.room.price);
-      setCategory(data.room.category._id);
-      setSubCategory(data.room.subcategory._id);
-      setQuantity(data.room.quantity._id);
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    getAllSubCategory();
+  }, [category]);
+
+  useEffect(() => {
+    // When selectedRoom changes, set the form values
+    if (selectedRoom) {
+      setCategory(selectedRoom.category?._id || ''); // Use optional chaining to safely access properties
+      setSubCategory(selectedRoom.subcategory?._id || '');
+      setPrice(selectedRoom.price || '');
+      setQuantity(selectedRoom.quantity || '');
+      setDescription(selectedRoom.description || '');
+      setId(selectedRoom._id || '');
     }
-  };
+  }, [selectedRoom]);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const roomData = new FormData();
-      roomData.append("category", category);
-      roomData.append("subcategory", subcategory);
       roomData.append("price", price);
       roomData.append("quantity", quantity);
       roomData.append("description", description);
-
-      const { data } = await axios.put(
-        `/api/v1/room/update-room/${id}`,
-        roomData
-      );
-      if (data?.success) {
-        toast.success("Room Updated Successfully");
-      } else {
-        toast.error(data?.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("something went wrong");
+      roomData.append("category", category);
+      roomData.append("subcategory", subcategory);
+    console.log(price);
+    console.log(quantity);
+    console.log(description);
+    console.log(category);
+    console.log(subcategory);
+    // console.log(roomData,"room");
+    const { data } = await axios.put(
+      `/api/v1/room/update-room/${id}`,
+      roomData
+    );
+    if (data?.success) {
+      toast.success("Room Updated Successfully");
+      // navigate("/");
+    } else {
+      toast.error(data?.message);
     }
-  };
+  } catch (error) {
+    console.log(error);
+    toast.error("something went wrong");
+  }
+
+
+};
 
   return (
-
     <div>
-      {/*  */}
       <div className="my-20">
         <h1 className="text-3xl font-semibold mb-6">
           Welcome to Hotel Booking
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {rooms.map((h) => (
-            <div key={h._id} className="bg-white shadow-lg rounded-lg p-4" >
+            <div key={h._id} className="bg-white shadow-lg rounded-lg p-4">
               <div className="p-4">
                 <p className="text-gray-600 mb-4">{h.description}</p>
                 <p className="text-lg font-semibold text-indigo-700 mb-2">
@@ -133,7 +138,7 @@ function AllRoom() {
                 </p>
                 <button
                   className="bg-teal-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300"
-                  onClick={() => handleBooking()}
+                  onClick={() => handleBooking(h)}
                 >
                   Update
                 </button>
@@ -148,7 +153,10 @@ function AllRoom() {
           as="div"
           className="relative z-10"
           initialFocus={cancelButtonRef}
-          onClose={setOpen}
+          onClose={() => {
+            setOpen(false);
+            setSelectedRoom(null);
+          }}
         >
           <Transition.Child
             as={Fragment}
@@ -180,43 +188,43 @@ function AllRoom() {
                         Update Rooms
                       </h1>
                       <div className="w-3/4 mx-auto">
-                      <select
-                          className="block w-full p-3 mb-6 border  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        <select
+                          className="block w-full p-3 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                           value={category}
                           onChange={(e) => {
                             setCategory(e.target.value);
                           }}
                         >
-                         
                           {categories?.map((c) => (
-                            <option key={c._id} value={c._id}>{c.name}</option>
+                            <option key={c._id} value={c._id}>
+                              {c.name}
+                            </option>
                           ))}
                         </select>
 
                         <select
-                          className="block w-full p-3 mb-6 border  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="block w-full p-3 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                           value={subcategory}
                           onChange={(e) => {
                             setSubCategory(e.target.value);
                           }}
                         >
-                         
                           {subcategories?.map((c) => (
-                            <option key={c._id} value={c._id}>{c.name}</option>
+                            <option key={c._id} value={c._id}>
+                              {c.name}
+                            </option>
                           ))}
                         </select>
 
-            
-
-          <div className="mb-6">
-            <input
-              type="number"
-              value={price}
-              placeholder="Price"
-              className="block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
+                        <div className="mb-6">
+                          <input
+                            type="number"
+                            value={price}
+                            placeholder="Price"
+                            className="block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onChange={(e) => setPrice(e.target.value)}
+                          />
+                        </div>
 
                         <div className="mb-6">
                           <input
