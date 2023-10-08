@@ -214,13 +214,13 @@ function HotelRoom() {
                                 htmlFor="Proof"
                                 className="block font-medium text-gray-700"
                               >
-                                Id-Proof:
+                                Id-Proof :
                               </label>
                               <input
                                 type="text"
                                 id="idProof"
                                 name="Id Proof"
-                                value={idProof}
+                                value={idProof} 
                                 onChange={handleIdProofChange}
                                 className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                               />

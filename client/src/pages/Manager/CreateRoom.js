@@ -10,7 +10,7 @@ function CreateRoom(props) {
   const handleRoomSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/rooms/create-rooms", {
+      const { data } = await axios.post("/api/v1/room/create-rooms", {
         price,
         quantity,
         description
