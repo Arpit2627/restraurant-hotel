@@ -28,6 +28,7 @@ import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
 import CreateRoom from "./pages/Manager/CreateRoom";
 import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
 import HotelRoom from "./components/Layout/HotelRoom";
+import HotelBookForm from "./components/Layout/HotelBookForm"
 function App() {
   return (
     <>
@@ -37,7 +38,7 @@ function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/menu" element={<Menu />} />
-
+        <Route path="/hotelBookForm/:categoryId" element={<HotelBookForm/>} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/search" element={<Search />} />
         <Route path="/dashboard" element={<PrivateRoute />}>

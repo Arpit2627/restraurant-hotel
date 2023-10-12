@@ -13,6 +13,7 @@ import billsRoute from "./routes/billsRoute.js";
 import atRoute from "./routes/atRoute.js";
 import roomcategoryRoutes from "./routes/roomcategoryRoutes.js"
 import roomsubcategoryRoutes from "./routes/roomsubcategoryRoute.js"
+import hotelbookRoute from "./routes/hotelbookRoute.js"
 import roomRoute from "./routes/roomRoute.js"
 import cors from "cors";
 import path from "path";
@@ -49,6 +50,7 @@ app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/bills", billsRoute);
 app.use("/api/v1/rooms",roomRoute)
+app.use("/api/v1/hotel",hotelbookRoute)
 
 // static files
 app.use(express.static(path.join(__dirname, "./client/build")));

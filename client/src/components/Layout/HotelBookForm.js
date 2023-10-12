@@ -1,0 +1,270 @@
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Layout from "./Layout";
+import toast from "react-hot-toast";
+
+const HotelBookForm = () => {
+  const [fullName, setFullName] = useState('');
+  const [idProof, setIdProof] = useState('');
+  const [phone, setPhone] = useState('');
+  const [roomCount, setRoomCount] = useState(1);
+  const [adult, setAdult] = useState(1);
+  const [child, setChild] = useState(1);
+  const [Subcategory, setSubcategory] = useState([]);
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [SubCategorytId,setSubCategoryId]=useState('');
+  const [branchId,setBranchId]=useState('');
+  const [branch,setBranch]=useState([]);
+  const [address, setAddress] = useState('');
+  const {categoryId}=useParams();
+  console.log(categoryId,"CATEGORYIT");
+ 
+  const getCatWiseSubCat = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/v1/roomsubcategory/get-sub-category/${categoryId}`
+      );
+      console.log(data,"data");
+      if (data.success) {
+        setSubcategory(data?.data);
+         
+        
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+  const getAllBranch = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/branch/get-all-branch");
+      setBranch(data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something Went Wrong");
+    }
+  };
+  useEffect(()=>{
+    getCatWiseSubCat();
+ },[categoryId])
+ useEffect(()=>{
+   getAllBranch();
+ },[])
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('/api/v1/hotel/book-a-room', {
+        name: fullName,
+
+        idProof,
+        phone,
+        roomCount,
+        adult,
+        children: child,
+        checkin: checkInDate,
+        checkout: checkOutDate,
+        address,
+        branch:branchId,
+        parentCategory:categoryId,
+        parentSubCategory:SubCategorytId
+      });
+
+      console.log(response.data);
+
+      // Reset the form after successful submission
+      setFullName('');
+      setIdProof('');
+      setPhone('');
+      setRoomCount(1);
+      setAdult(1);
+      setChild(1);
+      setCheckInDate('');
+      setCheckOutDate('');
+      setAddress('');
+      setBranchId('');
+      setSubCategoryId('')
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      // Handle error if needed
+    }
+  };
+  console.log(SubCategorytId,"subididi");
+  console.log(branchId,"branchididi");
+  console.log(categoryId,"cateId");
+  return (
+    <Layout>
+        <form onSubmit={handleFormSubmit} className="p-8 pt-20">
+      <div className="mb-4">
+        <label htmlFor="fullName" className="block font-medium text-gray-700">
+          Full Name:
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+      <div className="mb-4">
+      <select
+              className="block w-full px-4 py-2 mb-3 border rounded focus:outline-none focus:ring focus:border-blue-300"
+              value={branchId}
+              onChange={(e) => {
+                setBranchId(e.target.value);
+              }}
+            >
+              <option value="">Select a Bed type</option>
+              {branch?.map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+      </div>
+      <div className="mb-4">
+      <select
+              className="block w-full px-4 py-2 mb-3 border rounded focus:outline-none focus:ring focus:border-blue-300"
+              value={SubCategorytId}
+              onChange={(e) => {
+                setSubCategoryId(e.target.value);
+              }}
+            >
+              <option value="">Select a Bed type</option>
+              {Subcategory?.map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="idProof" className="block font-medium text-gray-700">
+          ID Proof:
+        </label>
+        <input
+          type="text"
+          id="idProof"
+          name="idProof"
+          value={idProof}
+          onChange={(e) => setIdProof(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="phone" className="block font-medium text-gray-700">
+          Phone:
+        </label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="roomCount" className="block font-medium text-gray-700">
+          Room Count:
+        </label>
+        <input
+          type="number"
+          id="roomCount"
+          name="roomCount"
+          value={roomCount}
+          onChange={(e) => setRoomCount(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="adult" className="block font-medium text-gray-700">
+          Adult:
+        </label>
+        <input
+          type="number"
+          id="adult"
+          name="adult"
+          value={adult}
+          onChange={(e) => setAdult(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="child" className="block font-medium text-gray-700">
+          Child:
+        </label>
+        <input
+          type="text"
+          id="child"
+          name="child"
+          value={child}
+          onChange={(e) => setChild(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="checkInDate" className="block font-medium text-gray-700">
+          Check-in Date:
+        </label>
+        <input
+          type="date"
+          id="checkInDate"
+          name="checkInDate"
+          value={checkInDate}
+          onChange={(e) => setCheckInDate(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="checkOutDate" className="block font-medium text-gray-700">
+          Check-out Date:
+        </label>
+        <input
+          type="date"
+          id="checkOutDate"
+          name="checkOutDate"
+          value={checkOutDate}
+          onChange={(e) => setCheckOutDate(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="address" className="block font-medium text-gray-700">
+          Address:
+        </label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300"
+      >
+        Book Now
+      </button>
+    </form>
+    </Layout>
+    
+  );
+};
+
+export default HotelBookForm;

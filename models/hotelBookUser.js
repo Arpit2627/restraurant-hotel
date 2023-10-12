@@ -1,11 +1,26 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const hotelBookUser = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
+    },
+    parentCategory:{ 
+      type:mongoose.ObjectId,
+      ref:"RoomCategory",
+      required:true
+    },
+    parentSubCategory:{
+      type:mongoose.ObjectId,
+      ref:"RoomSubCategory",
+      required:true
+    },
+    branch:{
+      type:mongoose.ObjectId,
+      ref:"Branch",
+      required:true 
     },
     checkin: {
       type: Date,
@@ -16,9 +31,13 @@ const userSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    people:{
+    adult:{
         type:String,
         required:true
+    },
+    children:{
+      type:String,
+      required:true
     },
     phone: {
       type: String,
@@ -36,4 +55,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("hotelbookusers", userSchema);
+export default mongoose.model("hotelbookusers", hotelBookUser);
