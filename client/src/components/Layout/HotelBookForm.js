@@ -16,11 +16,79 @@ const HotelBookForm = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [SubCategorytId,setSubCategoryId]=useState('');
   const [branchId,setBranchId]=useState('');
+  const [loading, setLoading] = useState(false);
+
+  
   const [branch,setBranch]=useState([]);
   const [address, setAddress] = useState('');
   const {categoryId}=useParams();
   console.log(categoryId,"CATEGORYIT");
- 
+  function loadRazorpay() {
+   
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onerror = () => {
+      alert("Razorpay SDK failed to load. Are you online?");
+    };
+    script.onload = async () => {
+      try {
+        setLoading(true);
+        const result = await axios.post("/api/v1/payment/create-order-hotel", {
+          
+          //change api endpoint for hotelroom cause this will not accept cart
+          // amount: parsedValue * 100,
+        });
+        const { amount, id: order_id, currency } = result.data;
+        const {
+          data: { key: razorpayKey },
+        } = await axios.get("/api/v1/payment/get-razorpay-key");
+        // console.log(cart);
+        const options = {
+          key: razorpayKey,
+          amount: amount,
+          currency: currency,
+          name: "manasvi technologies",
+          description: "transction to manasvi",
+          order_id: order_id,
+          handler: async function (response) {
+            // eslint-disable-next-line
+            const result = await axios.post("/api/v1/payment/pay-order", {
+              paymentMode: true,
+              amount: amount,
+              // products: cart,
+              razorpay: {
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+                signature: response.razorpay_signature,
+              },
+              // branch: selectedbranch,
+            });
+            // navigate(`/dashboard/user/orders`);
+            toast.success("Payment Completed Successfully ");
+          },
+          prefill: {
+            name: "Manasvi technologies",
+            email: "manasvi@gmail.com",
+            contact: "1111111111",
+          },
+          notes: {
+            address: "30, minaal residency bhopal",
+          },
+          theme: {
+            color: "#80c0f0",
+          },
+        };
+
+        setLoading(false);
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      } catch (err) {
+        alert(err);
+        setLoading(false);
+      }
+    };
+    document.body.appendChild(script);
+  }
   const getCatWiseSubCat = async () => {
     try {
       const { data } = await axios.get(
@@ -59,7 +127,6 @@ const HotelBookForm = () => {
     try {
       const response = await axios.post('/api/v1/hotel/book-a-room', {
         name: fullName,
-
         idProof,
         phone,
         roomCount,
@@ -73,8 +140,6 @@ const HotelBookForm = () => {
         parentSubCategory:SubCategorytId
       });
 
-      console.log(response.data);
-
       // Reset the form after successful submission
       setFullName('');
       setIdProof('');
@@ -86,15 +151,11 @@ const HotelBookForm = () => {
       setCheckOutDate('');
       setAddress('');
       setBranchId('');
-      setSubCategoryId('')
+      setSubCategoryId('');
     } catch (error) {
       console.error('Error submitting the form:', error);
-      // Handle error if needed
     }
   };
-  console.log(SubCategorytId,"subididi");
-  console.log(branchId,"branchididi");
-  console.log(categoryId,"cateId");
   return (
     <Layout>
         <form onSubmit={handleFormSubmit} className="p-8 pt-20">
