@@ -31,6 +31,7 @@ function HotelRoom() {
   const handleBooking = async() => {
     setOpen(true);
   };
+  
   const handleHotelBook = async(e) => {
   try {
     e.preventDefault();

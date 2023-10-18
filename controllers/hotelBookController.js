@@ -2,13 +2,11 @@ import hotelBookUser from "../models/hotelBookUser.js";
 
 export const hotelBookController = async (req, res) => {
   try {
-    const { name, checkin, checkout, phone, adult, children, idProof, address,parentCategory,parentSubCategory,branch } = req.body;
+    const { name, checkin, checkout, phone, adult, children, idProof, address,parentCategory,parentSubCategory,branch ,roomCount} = req.body;
     // validations
-    if (!name || !checkin || !checkout || !phone || !adult || !children || !idProof || !address) {
+    if (!name || !checkin || !checkout || !phone || !adult || !children || !idProof || !address ||!roomCount) {
       return res.status(400).send({ error: "All fields are required." });
     }
-
-    // additional validations (e.g., date format, type checking) can be added here
 
     // save
     const Room = await new hotelBookUser({
@@ -22,7 +20,8 @@ export const hotelBookController = async (req, res) => {
       idProof,
       parentCategory,
       parentSubCategory,
-      branch
+      branch,
+      roomCount
     }).save();
     
     res.status(201).send({

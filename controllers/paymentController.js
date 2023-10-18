@@ -3,6 +3,7 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 import JWT from "jsonwebtoken";
 import OrderRazor from "../models/orderRazor.js";
+import OrderHotelRazor from "../models/OrderHotelRazor.js"
 //payment verify
 export const razorPayKeyController = async (req, res) => {
   res.send({ key: process.env.RAZORPAY_KEY_ID });
@@ -110,6 +111,34 @@ export const razorPayOrderController = async (req, res) => {
     res.status(500).send(error);
   }
 };
+export const razorHotelPayOrderController = async (req, res) => {
+  try {
+    const {paymentMode, amount, OrderData, razorpay, buyer,branch } = req.body;
+    console.log(paymentMode,"paymentMode");
+    console.log(amount,"amount");
+    console.log(OrderData,"OrderData");
+    console.log(razorpay,"razorpay");
+    // console.log(OrderData,"paymentMode");
+    console.log(buyer,"buyer");
+    console.log(branch,"branch");
+    const newOrder = new OrderHotelRazor({
+      isPaid: true,
+      paymentMode: true,
+      amount: amount,
+      OrderData:OrderData,
+      razorpay: razorpay,
+      buyer: buyer,
+      branch
+    });
+    await newOrder.save();
+    res.send({
+      msg: "Payment was successful",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
 //payment verify
 export const razorPayListOrderController = async (req, res) => {
   try {
@@ -117,6 +146,25 @@ export const razorPayListOrderController = async (req, res) => {
     res.send(orders);
   } catch (error) {
     console.log(error);
+    res.status(500).send(error);
+  }
+};
+
+//room payment
+export const razorPayyCreatOrderController = async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_SECRET,
+    });
+    const options = {
+      amount: req.body.amount,
+      currency: "INR",
+    };
+    const orderRazor = await instance.orders.create(options);
+    if (!orderRazor) return res.status(500).send("Some error occured");
+    res.send(orderRazor);
+  } catch (error) {
     res.status(500).send(error);
   }
 };

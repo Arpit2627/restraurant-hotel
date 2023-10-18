@@ -75,6 +75,27 @@ export const getRoomController = async (req, res) => {
     });
   }
 };
+export const getRoomSubController = async (req, res) => {
+  try {
+    const { Subcategory } = req.query; // Use req.query to get URL parameters
+    console.log(Subcategory, "subcatete");
+
+    const room = await roomsModel.find({ subcategory: Subcategory });
+    res.status(200).send({
+      success: true,
+      message: "Get Rooms List",
+      room,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error while getting by subcat rooms",
+    });
+  }
+};
+
 
 export const updateRoomController = async (req, res) => {
   try {

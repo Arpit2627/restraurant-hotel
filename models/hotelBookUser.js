@@ -25,7 +25,6 @@ const hotelBookUser = new mongoose.Schema(
     checkin: {
       type: Date,
       required: true,
-      unique: true,
     },
     checkout: {
       type: Date,
@@ -50,6 +49,10 @@ const hotelBookUser = new mongoose.Schema(
     idProof: {
       type: String,
       required: true,
+    },
+    roomCount:{
+      type:String,
+      required:true
     }
   },
   { timestamps: true }

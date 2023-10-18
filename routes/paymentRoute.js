@@ -6,6 +6,7 @@ import {
   razorPayKeyController,
   razorPayListOrderController,
   razorPayOrderController,
+  razorHotelPayOrderController
 } from "../controllers/paymentController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
@@ -15,6 +16,7 @@ const router = express.Router();
 //orders
 router.get("/get-razorpay-key", requireSignIn, razorPayKeyController);
 router.post("/create-order", requireSignIn, razorPayCreatOrderController);
+router.post("/create-order-hotel", requireSignIn, razorPayCreatOrderController);
 
 
 
@@ -26,6 +28,8 @@ router.post("/pay-order-COD", requireSignIn, CODPayOrderController);
 
 //payment
 router.post("/pay-order", requireSignIn, razorPayOrderController);
+router.post("/hotel-pay-order", requireSignIn, razorHotelPayOrderController);
+
 //payment
 router.get("/list-orders", requireSignIn, razorPayListOrderController);
 

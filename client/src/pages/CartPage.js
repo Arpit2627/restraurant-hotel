@@ -131,8 +131,8 @@ const CartPage = () => {
             // eslint-disable-next-line
             const result = await axios.post("/api/v1/payment/pay-order", {
               paymentMode: true,
-              amount: amount,
-              products: cart,
+              amount: amount, 
+              products: cart, 
               razorpay: {
                 orderId: response.razorpay_order_id,
                 paymentId: response.razorpay_payment_id,
@@ -212,7 +212,7 @@ const CartPage = () => {
       alert(err);
       setLoading(false);
     }
-  };
+  }; 
 
   var OTP1 = 0;
 
