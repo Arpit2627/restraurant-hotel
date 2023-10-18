@@ -176,7 +176,7 @@ const HotelBookForm = () => {
       setCheckInDate("");
       setCheckOutDate("");
       setAddress("");
-      setBranchId("");
+      // setBranchId("");
       setSubCategoryId("");
 
       // Call loadRazorpay function after setting the form response
@@ -306,9 +306,7 @@ const HotelBookForm = () => {
             value={roomCount}
             onChange={(e) => {
               const value = e.target.valueAsNumber;
-              
                 setRoomCount(value);
-              
             }}
             onBlur={(e) => setRoomCount(e.target.valueAsNumber)}
             className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
@@ -330,12 +328,10 @@ const HotelBookForm = () => {
             name="adult"
             value={adult}
             onChange={(e) => {
-              const value = parseInt(e.target.value, 10);
-              if (!isNaN(value) && value >= 0) {
-                setAmount(value);
-              }
+              const value = e.target.value;
+                setAdult(value);
             }}
-            onBlur={(e) => setAdult(parseInt(e.target.value, 10))}
+            // onBlur={(e) => setAdult(parseInt(e.target.value, 10))}
             className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
           />
         </div>
@@ -350,10 +346,8 @@ const HotelBookForm = () => {
             name="child"
             value={child}
             onChange={(e) => {
-              const value = parseInt(e.target.value, 10);
-              if (!isNaN(value) && value >= 0) {
-                setChild(value);
-              }
+              const value = e.target.value;
+              setChild(value);
             }}
             className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
           />
