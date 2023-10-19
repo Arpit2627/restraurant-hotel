@@ -199,12 +199,6 @@ const HotelBookForm = () => {
       setCheckInDate("");
       setCheckOutDate("");
       setAddress("");
-      // setBranchId("");
-      // setSubCategoryId("");
-
-      // Call loadRazorpay function after setting the form response
-      // loadRazorpay();
-      // setTimeout(loadRazorpay(), 1000);
     } catch (error) {
       console.error("Error submitting the form:", error);
     }
