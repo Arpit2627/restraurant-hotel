@@ -149,6 +149,38 @@ export const razorPayListOrderController = async (req, res) => {
     res.status(500).send(error);
   }
 };
+//checkoutflag 
+export const razorPayCheckOutFlagOrderController = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    console.log(orderId,"hello");
+    // Assuming OrderRazor is your Mongoose model
+    const updatedOrder = await OrderHotelRazor.findOneAndUpdate(
+      { 'razorpay.orderId': orderId },
+      { $set: { 'OrderData.checkoutflag': true } },
+      { new: true }
+    );
+    if (updatedOrder) {
+      res.status(200).send({
+        success: true,
+        message: 'Order checkout flag updated successfully',
+        order: updatedOrder,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'Order not found with the provided orderId',
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error while updating order checkout flag',
+    });
+  }
+};
 
 //room payment
 export const razorPayyCreatOrderController = async (req, res) => {

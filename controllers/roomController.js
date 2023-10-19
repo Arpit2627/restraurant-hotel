@@ -98,8 +98,6 @@ export const getRoomSubController = async (req, res) => {
 export const updateRoomQuantityController = async (req, res) => {
   try {
     const { Subcategory, quantity } = req.query;
-    console.log(Subcategory,"subcategort");
-    console.log(quantity,"quantity");
     const updatedRoom = await roomsModel.findOneAndUpdate(
       { subcategory: Subcategory },
       { quantity },
@@ -120,6 +118,33 @@ export const updateRoomQuantityController = async (req, res) => {
     });
   }
 };
+export const updateRoomQuantityDuringCheckoutController = async (req, res) => {
+  try {
+    const {id}=req.params
+    const {  Addquantity } = req.body;
+    // console.log(id,"subcategoryid");
+    // console.log(Addquantity,"addquantity");
+    const addQuantityNumeric = parseInt(Addquantity, 10);
+    const updatedRoom = await roomsModel.findOneAndUpdate(
+      { subcategory: id },
+      { $inc: { quantity: addQuantityNumeric } }, 
+      { new: true } 
+    );
+    res.status(200).send({
+      success: true,
+      message: 'Room quantity updated successfully',
+      room: updatedRoom,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error while updating room quantity',
+    });
+  }
+};
+
 
 
 export const updateRoomController = async (req, res) => {

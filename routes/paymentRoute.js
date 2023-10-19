@@ -6,7 +6,8 @@ import {
   razorPayKeyController,
   razorPayListOrderController,
   razorPayOrderController,
-  razorHotelPayOrderController
+  razorHotelPayOrderController,
+  razorPayCheckOutFlagOrderController
 } from "../controllers/paymentController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
@@ -32,5 +33,8 @@ router.post("/hotel-pay-order", requireSignIn, razorHotelPayOrderController);
 
 //payment
 router.get("/list-orders", requireSignIn, razorPayListOrderController);
+
+//update checkoutflag for checkout button
+router.post("/checkout-flag", requireSignIn, razorPayCheckOutFlagOrderController);
 
 export default router;

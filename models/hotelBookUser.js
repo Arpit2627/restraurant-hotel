@@ -7,6 +7,10 @@ const hotelBookUser = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    checkoutflag:{
+      type:Boolean,
+      default:false
+    },
     parentCategory:{ 
       type:mongoose.ObjectId,
       ref:"RoomCategory",
