@@ -242,38 +242,67 @@ const HotelBookForm = () => {
   }, [CheckForAvalityAndPrice]);
   return (
     <Layout>
-      <form onSubmit={handleFormSubmit} className="p-8 pt-20">
-        <div className="mb-4">
-          <label htmlFor="fullName" className="block font-medium text-gray-700">
-            Full Name:
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
-        <div className="mb-4">
-          <select
-            className="block w-full px-4 py-2 mb-3 border rounded focus:outline-none focus:ring focus:border-blue-300"
-            value={branchId}
-            onChange={(e) => {
-              setBranchId(e.target.value);
-            }}
-          >
-            <option value="">Select a Bed type</option>
-            {branch?.map((c) => (
-              <option key={c._id} value={c._id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-4">
-          <select
+    <div className="min-h-screen flex items-center justify-center my-20">
+  <div className="bg-white p-6 md:p-8 lg:p-12 shadow-md rounded-lg">
+  <form onSubmit={handleFormSubmit} className="space-y-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label htmlFor="fullName" className="block font-medium text-gray-700">
+        Full Name:
+      </label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        value={fullName}
+        onChange={(e) => setFullName(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
+
+
+
+
+    <div>
+      <label htmlFor="idProof" className="block font-medium text-gray-700">
+        ID Proof:
+      </label>
+      <input
+        type="text"
+        id="idProof"
+        name="idProof"
+        value={idProof}
+        onChange={(e) => setIdProof(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
+
+    <div>
+      <label htmlFor="branchId" className="block font-medium text-gray-700">
+        Branch :
+      </label>
+      <select
+        className="w-full px-4 py-2 mb-3 border rounded focus:outline-none focus:ring focus:border-blue-300"
+        value={branchId}
+        onChange={(e) => {
+          setBranchId(e.target.value);
+        }}
+      >
+        <option value="">Select a Bed type</option>
+        {branch?.map((c) => (
+          <option key={c._id} value={c._id}>
+            {c.name}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    
+    <div>
+      <label htmlFor="branchId" className="block font-medium text-gray-700">
+        Sub Category :
+      </label>
+      <select
             className="block w-full px-4 py-2 mb-3 border rounded focus:outline-none focus:ring focus:border-blue-300"
             value={SubCategorytId}
             onChange={(e) => {
@@ -287,151 +316,125 @@ const HotelBookForm = () => {
               </option>
             ))}
           </select>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="idProof" className="block font-medium text-gray-700">
-            ID Proof:
-          </label>
-          <input
-            type="text"
-            id="idProof"
-            name="idProof"
-            value={idProof}
-            onChange={(e) => setIdProof(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="phone" className="block font-medium text-gray-700">
-            Phone:
-          </label>
-          <input
-            type="text"
-            id="phone"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+    <div>
+      <label htmlFor="phone" className="block font-medium text-gray-700">
+        Phone:
+      </label>
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="roomCount"
-            className="block font-medium text-gray-700"
-          >
-            Room Count:
-          </label>
-          <input
-            type="number"
-            id="roomCount"
-            name="roomCount"
-            value={roomCount}
-            onChange={(e) => {
-              const value = e.target.valueAsNumber;
-                setRoomCount(value);
-            }}
-            onBlur={(e) => setRoomCount(e.target.valueAsNumber)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-          {CheckForAvalityAndPrice?.quantity > 0 && (
-            <p className="text-red-500 mt-2">
-              Hurry Up! Only {CheckForAvalityAndPrice.quantity} rooms available.
-            </p>
-          )}
-        </div>
+    <div>
+      <label htmlFor="roomCount" className="block font-medium text-gray-700">
+        Room Count:
+      </label>
+      <input
+        type="number"
+        id="roomCount"
+        name="roomCount"
+        value={roomCount}
+        onChange={(e) => setRoomCount(e.target.valueAsNumber)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+      {CheckForAvalityAndPrice?.quantity > 0 && (
+        <p className="text-red-500 mt-2">
+          Hurry Up! Only {CheckForAvalityAndPrice.quantity} rooms available.
+        </p>
+      )}
+    </div>
 
-        <div className="mb-4">
-          <label htmlFor="adult" className="block font-medium text-gray-700">
-            Adult:
-          </label>
-          <input
-            type="number"
-            id="adult"
-            name="adult"
-            value={adult}
-            onChange={(e) => {
-              const value = e.target.value;
-                setAdult(value);
-            }}
-            // onBlur={(e) => setAdult(parseInt(e.target.value, 10))}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+    <div>
+      <label htmlFor="adult" className="block font-medium text-gray-700">
+        Adult:
+      </label>
+      <input
+        type="number"
+        id="adult"
+        name="adult"
+        value={adult}
+        onChange={(e) => setAdult(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
 
-        <div className="mb-4">
-          <label htmlFor="child" className="block font-medium text-gray-700">
-            Child:
-          </label>
-          <input
-            type="text"
-            id="child"
-            name="child"
-            value={child}
-            onChange={(e) => {
-              const value = e.target.value;
-              setChild(value);
-            }}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+    <div>
+      <label htmlFor="child" className="block font-medium text-gray-700">
+        Child:
+      </label>
+      <input
+        type="text"
+        id="child"
+        name="child"
+        value={child}
+        onChange={(e) => setChild(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="checkInDate"
-            className="block font-medium text-gray-700"
-          >
-            Check-in Date:
-          </label>
-          <input
-            type="date"
-            id="checkInDate"
-            name="checkInDate"
-            value={checkInDate}
-            onChange={(e) => setCheckInDate(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+    <div>
+      <label htmlFor="checkInDate" className="block font-medium text-gray-700">
+        Check-in Date:
+      </label>
+      <input
+        type="date"
+        id="checkInDate"
+        name="checkInDate"
+        value={checkInDate}
+        onChange={(e) => setCheckInDate(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="checkOutDate"
-            className="block font-medium text-gray-700"
-          >
-            Check-out Date:
-          </label>
-          <input
-            type="date"
-            id="checkOutDate"
-            name="checkOutDate"
-            value={checkOutDate}
-            onChange={(e) => setCheckOutDate(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+    <div>
+      <label htmlFor="checkOutDate" className="block font-medium text-gray-700">
+        Check-out Date:
+      </label>
+      <input
+        type="date"
+        id="checkOutDate"
+        name="checkOutDate"
+        value={checkOutDate}
+        onChange={(e) => setCheckOutDate(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+      />
+    </div>
 
-        <div className="mb-4">
-          <label htmlFor="address" className="block font-medium text-gray-700">
-            Address:
-          </label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
+  </div>
 
-        <button
-          type="submit"
-          className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300"
-        >
-          Book Now
-        </button>
-      </form>
+  <div>
+  <label htmlFor="address" className="block font-medium text-gray-700">
+    Address:
+  </label>
+  <input
+    type="text"
+    id="address"
+    name="address"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
+  />
+</div>
+   <div>
+      <button
+        type="submit"
+        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300"
+      >
+        Book Now
+      </button>
+    </div>
+</form>
+
+  </div>
+</div>
+
     </Layout>
   );
 };

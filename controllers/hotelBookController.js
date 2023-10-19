@@ -1,5 +1,7 @@
 import hotelBookUser from "../models/hotelBookUser.js";
-
+import OrderHotelRazor from "../models/OrderHotelRazor.js";
+import mongoose from "mongoose";
+import { useParams } from 'react-router-dom';
 export const hotelBookController = async (req, res) => {
   try {
     const { name, checkin, checkout, phone, adult, children, idProof, address,parentCategory,parentSubCategory,branch ,roomCount} = req.body;
@@ -38,3 +40,24 @@ export const hotelBookController = async (req, res) => {
     });
   }
 };
+
+export const GetOrderByBranchController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id,"idididi");
+    const Orders = await OrderHotelRazor.find({branch:id});
+    res.status(200).send({
+      success: true,
+      message: 'Order Fetch successfully',
+      Orders,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error while fetching online order quantity',
+    });
+  }
+};
+
