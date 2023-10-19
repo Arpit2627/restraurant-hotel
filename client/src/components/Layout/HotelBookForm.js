@@ -44,6 +44,29 @@ const HotelBookForm = () => {
       console.error(error);
     }
   };
+  const getRoomQuantBySubCat = async () => {
+    try {
+      console.log(CheckForAvalityAndPrice.quantity,"checkfoquantity");
+      console.log(roomCount,"checkfoquantity");
+      let updatedQuantity = CheckForAvalityAndPrice.quantity - roomCount;
+      if(updatedQuantity<=0){
+        updatedQuantity=0;
+      }
+      console.log(updatedQuantity,"updateQuantity");
+      const { data } = await axios.get("/api/v1/rooms/get-rooms-subcat-quant", {
+        params: {
+          Subcategory: SubCategorytId,
+          quantity: updatedQuantity,
+        },
+      });
+      if (data.success) {
+        console.log(data,"dataupdatequantity");
+        // getRoomBySubCat();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     if (SubCategorytId) {
       getRoomBySubCat();
@@ -89,7 +112,7 @@ const HotelBookForm = () => {
               buyer: auth?.user?._id,
               branch: branchId,
             });
-            // navigate(`/dashboard/user/orders`);
+            navigate(`/`);
             toast.success("Payment Completed Successfully ");
           },
           prefill: {
@@ -170,14 +193,14 @@ const HotelBookForm = () => {
       setFullName("");
       setIdProof("");
       setPhone("");
-      setRoomCount(1);
+      // setRoomCount(1);
       setAdult(1);
       setChild(1);
       setCheckInDate("");
       setCheckOutDate("");
       setAddress("");
       // setBranchId("");
-      setSubCategoryId("");
+      // setSubCategoryId("");
 
       // Call loadRazorpay function after setting the form response
       // loadRazorpay();
@@ -188,6 +211,7 @@ const HotelBookForm = () => {
   };
   useEffect(() => {
     if (formResponse?.name) {
+      getRoomQuantBySubCat();
       loadRazorpay();
     }
   }, [formResponse]);
