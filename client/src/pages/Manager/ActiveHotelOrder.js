@@ -75,7 +75,7 @@ const ActiveHotelOrder = () => {
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-3xl font-semibold text-center mb-6 text-blue-600">
-        All Customer List
+         Today Checkout List
       </h1>
 
       <div className="overflow-x-auto">
