@@ -138,3 +138,23 @@ export const GetSubcategoryByCategoryControlller = async (req, res) => {
     });
   }
 };  
+//get subcategory name by there object id
+export const GetSubcategoryByIdControlller = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id,"idididid");
+   const data= await Subcategorymodel.find({_id: id });
+    res.status(200).send({
+      success: true,
+      message: "Subcategory based on _id fetched Successfully",
+      data
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error while sub category based on _id",
+      error,
+    });
+  }
+};  

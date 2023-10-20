@@ -113,3 +113,24 @@ export const deleteRoomCategoryCOntroller = async (req, res) => {
     });
   }
 };
+
+//cat name by _id
+export const GetNameRoomCategoryController=async(req,res)=>{
+  try {
+    const { id } = req.params;
+    console.log(id,"idididid");
+    const data= await categoryModel.find({_id: id });
+    res.status(200).send({
+      success: true,
+      message: "category based on _id fetched Successfully",
+      data
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error while category based on _id",
+      error,
+    });
+  }
+}

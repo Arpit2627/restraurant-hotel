@@ -28,6 +28,7 @@ import CreateRoomCategory from "./pages/Manager/CreateRoomCategory";
 import CreateRoom from "./pages/Manager/CreateRoom";
 import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
 import HotelRoom from "./components/Layout/HotelRoom";
+import AllHotelInvoice from "./pages/Manager/AllHotelInvoice";
 import HotelBookForm from "./components/Layout/HotelBookForm"
 import HotelBookFormBranch from "./components/Layout/HotelBookFormBranch"
 function App() {
@@ -61,6 +62,7 @@ function App() {
           <Route path="manager/create-room" element={<CreateRoom/>} />
           <Route path="manager/food/:slug" element={<UpdateFood />} />
           <Route path="manager/allInvoice" element={<AllInvoice />} />
+          <Route path="manager/allHotelInvoice" element={<AllHotelInvoice/>} />
         </Route>
         <Route path="/dashboard" element={<StaffRoute />}>
           <Route path="staff" element={<StaffDashboard />} />

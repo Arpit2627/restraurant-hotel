@@ -15,7 +15,9 @@ import {
   registerStaffController,
   getAllCustomerController,
   getAllOrdersByBranchController,
-  getAllStaffMController
+  getAllStaffMController,
+  getAllRoomOrdersController,
+  getAllRoomWithOutOrdersController
 } from "../controllers/authController.js";
 import {
   isAdmin,
@@ -74,6 +76,8 @@ router.get("/orders", requireSignIn, getOrdersController);
 
 //all orders
 router.get("/all-orders", requireSignIn, getAllOrdersController);
+router.get("/all-room-orders/:id", requireSignIn, getAllRoomOrdersController);
+router.get("/all-room-orders", requireSignIn, getAllRoomWithOutOrdersController);
 
 //all user admin manager and staff and customer
 router.get("/all-users", getAllUserController);

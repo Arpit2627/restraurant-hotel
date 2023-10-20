@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js";
 import { comparePassword, hashPassword } from "./../helpers/authHelper.js";
 import JWT from "jsonwebtoken";
 import orderRazor from "../models/orderRazor.js";
+import OrderHotelRazor from "../models/OrderHotelRazor.js"
 export const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, address, answer } = req.body;
@@ -360,6 +361,45 @@ export const getAllOrdersController = async (req, res) => {
       success: false,
       message: "Error While Getting Orders",
       error,
+    });
+  }
+};
+export const getAllRoomOrdersController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Assuming you have a model named OrderHotelRazor
+    const orders = await OrderHotelRazor.find({ branch: id }).sort({ createdAt: "-1" });
+
+    res.status(200).send({
+      success: true,
+      message: "Orders retrieved successfully",
+      orders: orders,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Getting Orders",
+      error: error,
+    });
+  }
+};
+export const getAllRoomWithOutOrdersController = async (req, res) => {
+  try {
+    // const { id } = req.params;
+    // Assuming you have a model named OrderHotelRazor
+    const orders = await OrderHotelRazor.find({}).sort({ createdAt: "-1" });
+    res.status(200).send({
+      success: true,
+      message: "Orders retrieved successfully",
+      orders: orders,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Getting Orders",
+      error: error,
     });
   }
 };
