@@ -29,6 +29,7 @@ import CreateRoom from "./pages/Manager/CreateRoom";
 import CreateRoomSubcategory from "./pages/Manager/CreateRoomSubcategory"
 import HotelRoom from "./components/Layout/HotelRoom";
 import HotelBookForm from "./components/Layout/HotelBookForm"
+import HotelBookFormBranch from "./components/Layout/HotelBookFormBranch"
 function App() {
   return (
     <>
@@ -39,6 +40,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/hotelBookForm/:categoryId" element={<HotelBookForm/>} />
+        <Route path="/hotelBookFormBranch/:branchId" element={<HotelBookFormBranch/>} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/search" element={<Search />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
