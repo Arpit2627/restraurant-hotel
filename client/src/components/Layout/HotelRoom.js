@@ -96,12 +96,12 @@ function HotelRoom() {
       {/*  */}
       {/* Categories Section */}
       <div className="col-span-3">
-        <h2 className="text-2xl font-semibold mb-4 mt-20">Categories</h2>
+        <h2 className="text-2xl font-semibold mb-4  mt-20 text-center">Categories</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {category?.map((c) => (
             <div
               key={c._id}
-              className={`col-md-4 mt-5 mb-3 gx-3 gy-3 category ${
+              className={`col-md-4 mt-5 mb-3 gx-3 gy-3 category bg-gradient-to-b from-pink-200 to-white ${
                 selectedCategory === c._id ? "category-active" : ""
               }`}
               onClick={() => handleCategoryClick(c._id)}
@@ -111,18 +111,18 @@ function HotelRoom() {
                   <div className="font-bold text-xl mb-2">{c.name}</div>
                 </div>
                 <div className="px-6 py-4">
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  <span className="nline-block font-bold px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                     #Category
                   </span>
                   {/* You can add more details here if needed */}
                 </div>
                 <div className="p-4">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleExploreClick(c._id)}
-                  >
-                    Explore
-                  </button>
+                <button
+                      className="bg-gradient-to-r from-pink-500 to-pink-500 hover:from-pink-600 hover:to-pink-900 text-white font-bold py-2 px-4 rounded-full mt-4"
+                      onClick={() => handleExploreClick(c._id)}
+                    >
+                      Explore
+                    </button>
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ function HotelRoom() {
       </div>
 
       {/*  */}
-      <div className="my-20">
+      <div className="my-20 flex flex-col items-center">
         <h1 className="text-3xl font-semibold mb-6">
           Explore Our Other Outlet
         </h1>
@@ -141,7 +141,7 @@ function HotelRoom() {
               <div className="p-4">
                 <p className="text-gray-600 mb-4">{h.name}</p>
                 <button
-                  className="bg-teal-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 transition duration-300"
+                   className="bg-gradient-to-r  from-pink-500 to-pink-500 text-white rounded-md py-2 px-4 hover:from-pink-600 hover:to-pink-900 transition duration-300"
                   onClick={() => handleExploreOutletClick(h._id)}
                 >
                   Book Now
