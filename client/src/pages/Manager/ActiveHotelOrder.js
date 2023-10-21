@@ -91,22 +91,6 @@ const ActiveHotelOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {staff?.map((p, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                } hover:bg-gray-200 transition duration-300 ease-in-out`}
-              >
-                <td className="py-3 px-4 whitespace-nowrap">{p.razorpay.orderId}</td>
-                <td className="py-3 px-4 whitespace-nowrap">{p.OrderData.name}</td>
-                <td className="py-3 px-4">{p.OrderData.idProof}</td>
-                <td className="py-3 px-4">{formatDate(p.OrderData.checkin)}</td>
-                <td className="py-3 px-4">{formatDate(p.OrderData.checkout)}</td>
-                <td className="py-3 px-4">{p.amount}</td>
-                
-              </tr>
-            ))} */}
             {staff.length > 0 ? (
               staff.map((p, index) => (
                 <tr
