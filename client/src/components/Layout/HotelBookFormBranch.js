@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
-
+import moment from "moment";
 const HotelBookFormBranch = () => {
   const [fullName, setFullName] = useState("");
   const [idProof, setIdProof] = useState("");
@@ -237,7 +237,26 @@ const getAllCategory = async () => {
   }, [CheckForAvalityAndPrice]);
   useEffect(()=>{
     getAllCategory();
+    const today = moment().format("YYYY-MM-DD");
+
+    // Set the minimum date for the input field to today
+    document.getElementById("checkInDate").min = today;
   },[])
+
+  const handleCheckInDateChange = (e) => {
+    const selectedCheckInDate = e.target.value;
+    setCheckInDate(selectedCheckInDate);
+    
+    // Calculate the minimum allowed checkout date based on the selected check-in date
+    const minCheckoutDate = new Date(selectedCheckInDate);
+    minCheckoutDate.setDate(minCheckoutDate.getDate() + 1); // Assuming check-out should be at least one day after check-in
+    
+    // Format the minimum checkout date in "YYYY-MM-DD" format
+    const formattedMinCheckoutDate = minCheckoutDate.toISOString().split("T")[0];
+    
+    // Set the minimum date for the checkout input
+    document.getElementById("checkOutDate").min = formattedMinCheckoutDate;
+  };
   return (
     <Layout>
     <div className="min-h-screen flex items-center justify-center my-20">
@@ -382,7 +401,7 @@ const getAllCategory = async () => {
         id="checkInDate"
         name="checkInDate"
         value={checkInDate}
-        onChange={(e) => setCheckInDate(e.target.value)}
+        onChange={handleCheckInDateChange}
         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
       />
     </div>
