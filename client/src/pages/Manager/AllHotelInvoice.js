@@ -92,8 +92,8 @@ const AllHotelInvoice = () => {
   };
 
   return (
-    <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-      <div className="container mx-auto py-8">
+    <div className="flex flex-col items-center justify-center">
+    <div className="bg-white rounded-lg overflow-hidden shadow-xl p-8 max-w-screen-md">
         <div
           id="invoice-POS"
           //   ref={componentRef}
