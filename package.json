@@ -28,6 +28,7 @@
     "nanoid": "^4.0.2",
     "nodemon": "^3.0.1",
     "razorpay": "^2.9.2",
+    "react": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
     "react-to-print": "^2.14.13",
