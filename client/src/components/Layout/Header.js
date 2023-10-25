@@ -39,7 +39,7 @@ const Header = () => {
 
   const navigation = [
     {
-      name: "Rooms",
+      name: "Room",
       to: "/hotel",
       current: true,
       classes: "text-red-500 font-bold bg-black text-white",

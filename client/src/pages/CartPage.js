@@ -38,11 +38,15 @@ const CartPage = () => {
     }
   };
   useEffect(() => {
-    getAllBranch();
+    if(tokenn){
+      getAllBranch();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [tokenn]);
   useEffect(()=>{
+   if(orderId){
     fetchOrderId();
+   }
   },[orderId])
   const handleBranchSelect = (event) => {
     const selectedBranch = event.target.value;
