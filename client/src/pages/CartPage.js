@@ -38,10 +38,12 @@ const CartPage = () => {
     }
   };
   useEffect(() => {
-    fetchOrderId();
     getAllBranch();
     // eslint-disable-next-line
   }, []);
+  useEffect(()=>{
+    fetchOrderId();
+  },[orderId])
   const handleBranchSelect = (event) => {
     const selectedBranch = event.target.value;
     setSelectedBranch(selectedBranch);
