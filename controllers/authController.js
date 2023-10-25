@@ -525,3 +525,51 @@ export const getAllStaffMController = async (req, res) => {
     });
   }
 };
+export const updateStaffController = async (req, res) => {
+  try {
+    const staffId = req.params.id;
+    const {name,email,address,phone} = req.body;
+    const updatedStaff = await userModel.findByIdAndUpdate(
+      staffId,
+        {name:name,email:email,phone:phone,address:address},
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedStaff) {
+      return res.status(404).json({ success: false, message: "Staff not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Staff updated successfully",
+      staff: updatedStaff,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while updating staff",
+      error,
+    });
+  }
+};
+
+
+  export const deletestaffController= async (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(id,"ud");
+      await userModel.findByIdAndDelete(id);
+      res.status(200).send({
+        success: true,
+        message: "Staff Deleted Successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "error while deleting user",
+        error,
+      });
+    }
+  };

@@ -70,7 +70,7 @@ const Menu = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-4">
           {/* Categories Section */}
           <div className="col-span-3">
-            <h2 className="text-2xl font-semibold mb-4 mt-20">Categories</h2>
+          <h2 className="text-2xl font-semibold mb-4 mt-20">Categories</h2>
             <div className="flex flex-wrap justify-center gap-4">
               {category?.map((c) => (
                 <div

@@ -159,12 +159,12 @@ const Header = () => {
                   <Link to="/cart">
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <button className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
 
                           <ShoppingCartIcon className="h-6 w-6 " />
-                        </Menu.Button>
+                        </button>
                         <span
                           className="badge"
                           style={{

@@ -10,6 +10,7 @@ import CreateManager from "./CreateManager";
 import AllFood from "./AllFood";
 import ReportsAdmin from "./ReportsAdmin";
 import EmployeeRecord from "./EmployeeRecord";
+import { IoFastFood,IoLogOut } from "react-icons/io5";
 
 const Branch = () => {
   const [auth, setAuth] = useAuth();
@@ -131,7 +132,7 @@ const Branch = () => {
       <div
         className={` ${
           open ? "w-72" : "w-20 "
-        } bg-gray-800 h-screen p-5  pt-8 relative duration-300`}
+        } bg-gray-800 h-auto p-5  pt-8 relative duration-300`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +141,7 @@ const Branch = () => {
           strokeWidth={1.5}
           stroke="currentColor"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-blue
-         border-2 rounded-full  ${!open && "rotate-180"}`}
+         border-2 rounded-full bg-white ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
         >
           <path
@@ -169,23 +170,23 @@ const Branch = () => {
         <ul className="pt-6">
           <li
             className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
-             onClick={() => setOpen(!open)}
+            onClick={() => setOpen(!open)}
           >
             <Link to="/">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-6 h-6"
-            >
-              <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-              <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6"
+              >
+                <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+              </svg>
             </Link>
             <Link to="/">
-            <span className={`${!open && "hidden"} origin-left duration-200`}>
-              Home
-            </span>
+              <span className={`${!open && "hidden"} origin-left duration-200`}>
+                Home
+              </span>
             </Link>
           </li>
           <li
@@ -229,7 +230,7 @@ const Branch = () => {
               <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
             </svg>
             <span className={`${!open && "hidden"} origin-left duration-200`}>
-              Create Branch
+              Add Branch
             </span>
           </li>
 
@@ -250,7 +251,7 @@ const Branch = () => {
               <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
             </svg>
             <span className={`${!open && "hidden"} origin-left duration-200`}>
-              Create Manager
+              Add Manager
             </span>
           </li>
 
@@ -358,14 +359,10 @@ const Branch = () => {
               setOpen(!open);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-6 h-6"
-            >
-              <path d="M15 1.784l-.796.796a1.125 1.125 0 101.591 0L15 1.784zM12 1.784l-.796.796a1.125 1.125 0 101.591 0L12 1.784zM9 1.784l-.796.796a1.125 1.125 0 101.591 0L9 1.784zM9.75 7.547c.498-.02.998-.035 1.5-.042V6.75a.75.75 0 011.5 0v.755c.502.007 1.002.021 1.5.042V6.75a.75.75 0 011.5 0v.88l.307.022c1.55.117 2.693 1.427 2.693 2.946v1.018a62.182 62.182 0 00-13.5 0v-1.018c0-1.519 1.143-2.829 2.693-2.946l.307-.022v-.88a.75.75 0 011.5 0v.797zM12 12.75c-2.472 0-4.9.184-7.274.54-1.454.217-2.476 1.482-2.476 2.916v.384a4.104 4.104 0 012.585.364 2.605 2.605 0 002.33 0 4.104 4.104 0 013.67 0 2.605 2.605 0 002.33 0 4.104 4.104 0 013.67 0 2.605 2.605 0 002.33 0 4.104 4.104 0 012.585-.364v-.384c0-1.434-1.022-2.7-2.476-2.917A49.138 49.138 0 0012 12.75zM21.75 18.131a2.604 2.604 0 00-1.915.165 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-2.33 0 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-2.33 0 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-1.915-.165v2.494c0 1.036.84 1.875 1.875 1.875h15.75c1.035 0 1.875-.84 1.875-1.875v-2.494z" />
-            </svg>
+           
+
+              <IoFastFood className="text-2xl"/>
+
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               Food
             </span>
@@ -374,18 +371,8 @@ const Branch = () => {
             className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${"mt-2"} `}
             onClick={() => handleLogout()}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z"
-                clip-rule="evenodd"
-              />
-            </svg>
+           
+            <IoLogOut className="text-2xl"/>
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               Logout
             </span>
@@ -396,7 +383,7 @@ const Branch = () => {
         <div className="min-h-screen overflow-x-auto bg-gray-100 xl:2xl:max-w-xl">
           {" "}
           {/* Main Content */}
-          <main className="flex-1 p-6">
+          <main className="flex-1 p-6"> 
             {/* Your dashboard cards */}
             {selectedContent === "dashboard" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

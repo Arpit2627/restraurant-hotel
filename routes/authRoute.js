@@ -17,7 +17,9 @@ import {
   getAllOrdersByBranchController,
   getAllStaffMController,
   getAllRoomOrdersController,
-  getAllRoomWithOutOrdersController
+  getAllRoomWithOutOrdersController,
+  updateStaffController,
+  deletestaffController
 } from "../controllers/authController.js";
 import {
   isAdmin,
@@ -104,5 +106,13 @@ router.put(
 
 //get order by branch
 router.get("/all-orders/:id", requireSignIn, getAllOrdersByBranchController);
+router.put(
+  "/update-staff/:id",
+  // requireSignIn,
+  updateStaffController
+);
+
+//delete staff
+router.delete("/delete-staff/:id", deletestaffController);
 
 export default router;
