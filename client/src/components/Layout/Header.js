@@ -51,11 +51,13 @@ const Header = () => {
   ];
 
   const afterNavigation = [
-    { name: "Room", to: "/hotel", current: true,classes:'text-red-500 font-bold bg-black text-white' },
-
+    {
+      name: "Room",
+      to: "/hotel",
+      current: true,
+      classes: "text-red-500 font-bold bg-black text-white",
+    },
     { name: "Home", to: "/", current: true },
-
-
     { name: "Menu", to: "/menu", current: true },
     {
       name: "Dashboard",
@@ -79,11 +81,9 @@ const Header = () => {
     { name: "My Orders", to: "/dashboard/user/orders", current: true },
     { name: "Logout", onClick: handleLogout, to: "/", current: true },
   ];
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
   return (
     <nav className="fixed top-0 w-full bg-opacity-20 backdrop-blur-lg bg-cover bg-center bg-gradient-to-b from-white to-white shadow-xl">
       {" "}
@@ -112,7 +112,6 @@ const Header = () => {
                     </Link>
                   </div>
                 </div>
-<Link to="/hotel"></Link>
                 <div className="hidden sm:ml-6 sm:block">
                   {!auth?.user ? (
                     <div className="flex space-x-4">
@@ -123,7 +122,7 @@ const Header = () => {
                           className={classNames(
                             item.current ? "text-black" : "text-black",
                             "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 hover:text-black transition-colors duration-300",
-                            item.classes 
+                            item.classes
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -151,7 +150,6 @@ const Header = () => {
                     </div>
                   )}
                 </div>
-
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <Link to="/login"></Link>
