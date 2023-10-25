@@ -50,7 +50,7 @@ const HomePage = () => {
             <div className=" rounded-lg shadow-md p-4 inline-block my-32 bg-white">
               <div className="text-center my-8">
                 <p className="text-4xl md:text-7xl">
-                  Simple And <br /> Tasty Reciepes
+                  Simple And <br /> Tasty Recipes
                 </p>
               </div>
               <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 py-16 px-4 space-x-11">
