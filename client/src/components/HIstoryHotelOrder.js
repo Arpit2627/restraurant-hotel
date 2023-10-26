@@ -86,21 +86,27 @@ const HistoryHotelOrder = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {hotelOrders.map((order) => (
-              <tr
-                className="border-b border-gray-200 hover-bg-gray-100"
-                key={order._id}
-              >
-                <td className="py-3 px-3 text-left">{order?.razorpay?.orderId}</td>
-                <td className="py-3 px-3 text-left">{order?.OrderData?.name}</td>
-                <td className="py-3 px-3 text-left">{order?.OrderData?.checkin}</td>
-                <td className="py-3 px-3 text-left">{order?.OrderData?.checkout}</td>
-                <td className="py-3 px-3 text-left">{categoryNames[order._id]?.categoryName}</td>
-                <td className="py-3 px-3 text-left">{categoryNames[order._id]?.subcategoryName}</td>
-                <td className="py-3 px-3 text-left">{order?.amount}</td>
-                <td className="py-3 px-3 text-left">{order?.OrderData?.roomCount}</td>
+            {hotelOrders.length === 0 ? (
+              <tr>
+                <td colSpan="8" className="py-3 px-3 text-center">No Orders Found</td>
               </tr>
-            ))}
+            ) : (
+              hotelOrders.map((order) => (
+                <tr
+                  className="border-b border-gray-200 hover-bg-gray-100"
+                  key={order._id}
+                >
+                  <td className="py-3 px-3 text-left">{order?.razorpay?.orderId}</td>
+                  <td className="py-3 px-3 text-left">{order?.OrderData?.name}</td>
+                  <td className="py-3 px-3 text-left">{order?.OrderData?.checkin}</td>
+                  <td className="py-3 px-3 text-left">{order?.OrderData?.checkout}</td>
+                  <td className="py-3 px-3 text-left">{categoryNames[order._id]?.categoryName}</td>
+                  <td className="py-3 px-3 text-left">{categoryNames[order._id]?.subcategoryName}</td>
+                  <td className="py-3 px-3 text-left">{order?.amount}</td>
+                  <td className="py-3 px-3 text-left">{order?.OrderData?.roomCount}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
