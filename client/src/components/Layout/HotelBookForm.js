@@ -99,8 +99,21 @@ const HotelBookForm = () => {
               buyer: auth?.user?._id,
               branch: branchId,
             });
-            navigate(`/`);
+            if(result?.data?.success){
             toast.success("Payment Completed Successfully ");
+            if(auth?.user?.role===2){
+            navigate(`/dashboard/manager/h_orders-list`);
+            }else if(auth?.user?.role===3){
+              navigate(`/dashboard/admin/h_orders-list`)
+            }else if(auth?.user?.role===1){
+              navigate(`/dashboard/staff/h_orders-list`);
+            }else if(auth?.user?.role===0){
+              navigate(`/dashboard/user/h_orders-list`)
+            }
+            }else{
+              toast.error("Something Went wrong during payment");
+              navigate(`/`);
+            }
           },
           prefill: {
             name: "Manasvi technologies",
@@ -161,7 +174,36 @@ const HotelBookForm = () => {
   }, []);
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    if (!fullName ) {
+      toast.error("full name is required");
+      return;
+    }
+    if ( !idProof) {
+      toast.error("ID Proof is required");
+      return;
+    }
+    if (  !phone   ) {
+      toast.error("phone number is required");
+      return;
+    }
+    if (!checkInDate  ) {
+      toast.error("please select checkin date ");
+      return;
+    }
+    if (!checkOutDate ) {
+      toast.error("please select checkout date");
+      return;
+    }
+    if (!roomCount ) {
+      toast.error("please enter roomcount");
+      return;
+    }
+    
+    // Check if room count is zero
+    if (roomCount === 0) {
+      toast.error("Room count should not be zero.");
+      return;
+    }
     try {
       const response = await axios.post("/api/v1/hotel/book-a-room", {
         name: fullName,

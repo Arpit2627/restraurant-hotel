@@ -133,6 +133,8 @@ export const razorHotelPayOrderController = async (req, res) => {
     await newOrder.save();
     res.send({
       msg: "Payment was successful",
+      success:true,
+      newOrder
     });
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import { useAuth } from "../../context/auth";
+import HistoryHotelOrder from "../../components/HIstoryHotelOrder"; // Adjust the import path as needed
 
 const Dashboard = () => {
   const [auth] = useAuth();
@@ -8,7 +9,7 @@ const Dashboard = () => {
   return (
     <Layout title={"Dashboard - Restaurant"}>
       <div className="container mx-auto py-8 my-6">
-        <div className="bg-white rounded-lg   shadow-lg p-6 md:p-8 lg:p-10">
+        <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 lg:p-10">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
             Dashboard
           </h1>
@@ -31,6 +32,10 @@ const Dashboard = () => {
                 <span className="font-semibold">User Address:</span>{" "}
                 {auth?.user?.address}
               </div>
+            </div>
+            <div className="border p-4 rounded-md">
+              <h2 className="text-xl font-semibold mb-4">Hotel Order History</h2>
+              <HistoryHotelOrder /> {/* Render the HistoryHotelOrder component here */}
             </div>
           </div>
         </div>

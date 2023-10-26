@@ -61,3 +61,22 @@ export const GetOrderByBranchController = async (req, res) => {
   }
 };
 
+export const HotelOrderHistorByUserwise = async (req,res)=>{
+  try {
+    const { id } = req.params;
+    console.log(id,"idididi");
+    const Orders = await OrderHotelRazor.find({buyer:id});
+    res.status(200).send({
+      success: true,
+      message: 'Order Fetch successfully',
+      Orders,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error while fetching online order quantity',
+    });
+  }
+}

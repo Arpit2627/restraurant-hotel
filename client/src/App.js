@@ -31,12 +31,14 @@ import HotelRoom from "./components/Layout/HotelRoom";
 import AllHotelInvoice from "./pages/Manager/AllHotelInvoice";
 import HotelBookForm from "./components/Layout/HotelBookForm"
 import HotelBookFormBranch from "./components/Layout/HotelBookFormBranch"
+import HistoryHotelOrder from "./components/HIstoryHotelOrder";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/hotel" element={<HotelRoom />} />
+        
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/menu" element={<Menu />} />
@@ -48,10 +50,12 @@ function App() {
           <Route path="user" element={<Dashboard />} />
           <Route path="user/profile" element={<Profile />} />
           <Route path="user/orders" element={<Orders />} />
+          <Route path="user/h_orders-list" element={<HistoryHotelOrder/>} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-branch" element={<CreateBranch />} />
+          <Route path="admin/h_orders-list" element={<HistoryHotelOrder/>} />
         </Route>
         <Route path="/dashboard" element={<ManagerRoute />}>
           <Route path="manager" element={<MangerDashboard />} />
@@ -63,9 +67,12 @@ function App() {
           <Route path="manager/food/:slug" element={<UpdateFood />} />
           <Route path="manager/allInvoice" element={<AllInvoice />} />
           <Route path="manager/allHotelInvoice" element={<AllHotelInvoice/>} />
+          <Route path="manager/h_orders-list" element={<HistoryHotelOrder/>} />
         </Route>
         <Route path="/dashboard" element={<StaffRoute />}>
           <Route path="staff" element={<StaffDashboard />} />
+          <Route path="staff/h_orders-list" element={<HistoryHotelOrder/>} />
+
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPasssword />} />

@@ -1,80 +1,106 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-const AllManager = () => {
-  const [branch, setBranch] = useState([]);
-  const [manager, setManager] = useState([]);
 
-  // Function to fetch all branch data
-  const getAllBranch = async () => {
+const HistoryHotelOrder = () => {
+  const [hotelOrders, setHotelOrders] = useState([]);
+  const [categoryNames, setCategoryNames] = useState({});
+  const [auth] = useAuth();
+
+  const getAllHotelOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/branch/get-all-branch");
-      setBranch(data);
+      const result = await axios.get(
+        `/api/v1/hotel/Hotel-Order-list/${auth?.user?._id}`
+      );
+      console.log(result);
+      console.log(result?.data);
+      setHotelOrders(result?.data?.Orders);
     } catch (error) {
       console.error(error);
       toast.error("Something Went Wrong");
     }
   };
 
-  const getAllManager = async () => {
+  const getOrdersCategoryName = async (id) => {
     try {
-      const { data } = await axios.get("/api/v1/auth/get-manager");
-      setManager(data);
+      const response = await axios.get(`/api/v1/roomcategory/cat-name/${id}`);
+      return response?.data?.data[0]?.name;
     } catch (error) {
-      console.error(error);
-      toast.error("Something Went Wrong");
+      console.log(error);
+      return "";
     }
   };
 
-  // Lifecycle method to fetch data when the component mounts
+  const getOrdersSubcategoryName = async (id) => {
+    try {
+      const response = await axios.get(`/api/v1/roomsubcategory/subcat-name/${id}`);
+      return response?.data?.data[0]?.name;
+    } catch (error) {
+      console.log(error);
+      return "";
+    }
+  };
+
+  // Function to fetch and set category and subcategory names for all orders
+  const fetchCategoryAndSubcategoryNamesForAllOrders = async () => {
+    let categoryNamesForOrders = {};
+    for (const order of hotelOrders) {
+      const categoryName = await getOrdersCategoryName(order?.OrderData?.parentCategory);
+      const subcategoryName = await getOrdersSubcategoryName(order?.OrderData?.parentSubCategory);
+      categoryNamesForOrders[order._id] = { categoryName, subcategoryName };
+    }
+    setCategoryNames(categoryNamesForOrders);
+  };
+
   useEffect(() => {
-    getAllBranch();
-    getAllManager();
-  }, []);
+    if (auth?.user?._id) {
+      getAllHotelOrders();
+    }
+  }, [auth?.user?._id]);
 
-  // Function to filter manager data by matching IDs
-  const getManagerById = (branchId) => {
-    return branch.find((b) => b._id === branchId);
-  };
+  // Use a separate effect to fetch and set category and subcategory names for all orders
+  useEffect(() => {
+    if (hotelOrders.length > 0) {
+      fetchCategoryAndSubcategoryNamesForAllOrders();
+    }
+  }, [hotelOrders]);
+
   return (
-    <div className="row p-5  dashboard">
+    <div className="row p-5 dashboard">
       <div className="col-md-3" style={{ width: "378px", marginLeft: "22px" }}>
-        {/* <AdminMenu /> */}
       </div>
-      <div className="col-md-8 ">
-        <h1 className="text-center">All manager List</h1>
+      <div className="col-md-8">
+        <h1 className="text-center">Your Hotel Orders</h1>
         <table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-2 px-3 text-left">Name</th>
-              <th className="py-2 px-3 text-left">Email</th>
-              <th className="py-2 px-3 text-left">Phone</th>
-              <th className="py-2 px-3 text-left">Address</th>
-              <th className="py-2 px-3 text-left">Branch Name</th>
-              <th className="py-2 px-3 text-left">Branch address</th>
+              <th className="py-2 px-3 text-left">Order ID</th>
+              <th className="py-2 px-3 text-left">User Name</th>
+              <th className="py-2 px-3 text-left">Check-In</th>
+              <th className="py-2 px-3 text-left">Check-Out</th>
+              <th className="py-2 px-3 text-left">Room Category</th>
+              <th className="py-2 px-3 text-left">Subcategory</th>
+              <th className="py-2 px-3 text-left">Amount</th>
+              <th className="py-2 px-3 text-left">Room Count</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {manager?.map(
-              (b) =>
-                b.branch &&
-                getManagerById(b.branch) && (
-                  <tr className="border-b border-gray-200 hover:bg-gray-100">
-                    <td className="py-3 px-3 text-left">{b.name}</td>
-                    <td className="py-3 px-3 text-left">{b.email}</td>
-                    <td className="py-3 px-3 text-left">{b.phone}</td>
-                    <td className="py-3 px-3 text-left">{b.address}</td>
-                    <td className="py-3 px-3 ">
-                      {getManagerById(b.branch).name}
-                    </td>
-                    <td className="py-3 px-3 ">
-                      {getManagerById(b.branch).address}
-                    </td>
-                    {/* Add more columns here if needed */}
-                  </tr>
-                )
-            )}
+            {hotelOrders.map((order) => (
+              <tr
+                className="border-b border-gray-200 hover-bg-gray-100"
+                key={order._id}
+              >
+                <td className="py-3 px-3 text-left">{order?.razorpay?.orderId}</td>
+                <td className="py-3 px-3 text-left">{order?.OrderData?.name}</td>
+                <td className="py-3 px-3 text-left">{order?.OrderData?.checkin}</td>
+                <td className="py-3 px-3 text-left">{order?.OrderData?.checkout}</td>
+                <td className="py-3 px-3 text-left">{categoryNames[order._id]?.categoryName}</td>
+                <td className="py-3 px-3 text-left">{categoryNames[order._id]?.subcategoryName}</td>
+                <td className="py-3 px-3 text-left">{order?.amount}</td>
+                <td className="py-3 px-3 text-left">{order?.OrderData?.roomCount}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -82,4 +108,4 @@ const AllManager = () => {
   );
 };
 
-export default AllManager;
+export default HistoryHotelOrder;

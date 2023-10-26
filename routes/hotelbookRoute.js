@@ -1,5 +1,5 @@
 import express from "express";
-import { hotelBookController,GetOrderByBranchController} from "../controllers/hotelBookController.js";
+import { hotelBookController,GetOrderByBranchController,HotelOrderHistorByUserwise} from "../controllers/hotelBookController.js";
 
 const router = express.Router();
 
@@ -7,6 +7,7 @@ const router = express.Router();
 //Method - POST
 router.post("/book-a-room",hotelBookController);
 router.get("/get-orderbybranch/:id",GetOrderByBranchController)
+router.get("/Hotel-Order-list/:id",HotelOrderHistorByUserwise)
 
 //Method - GET
 // router.get("/get-bills/:id",getBillsController);
