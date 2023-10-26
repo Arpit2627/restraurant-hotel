@@ -72,43 +72,46 @@ const HistoryHotelOrder = () => {
       </div>
       <div className="col-md-8">
       <h2 className="text-center mb-4">Your Hotel Orders</h2>
-<table className="min-w-full table-auto">
-          <thead>
+      <div className="overflow-x-auto ">
+        <table className="min-w-full table-auto">
+            <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-2 px-3 text-left">Order ID</th>
-              <th className="py-2 px-3 text-left">User Name</th>
-              <th className="py-2 px-3 text-left">Check-In</th>
-              <th className="py-2 px-3 text-left">Check-Out</th>
-              <th className="py-2 px-3 text-left">Room Category</th>
-              <th className="py-2 px-3 text-left">Subcategory</th>
-              <th className="py-2 px-3 text-left">Amount</th>
-              <th className="py-2 px-3 text-left">Room Count</th>
+                <th className="py-2 px-3 text-left">Order ID</th>
+                <th className="py-2 px-3 text-left">User Name</th>
+                <th className="py-2 px-3 text-left">Check-In</th>
+                <th className="py-2 px-3 text-left">Check-Out</th>
+                <th className="py-2 px-3 text-left">Room Category</th>
+                <th className="py-2 px-3 text-left">Subcategory</th>
+                <th className="py-2 px-3 text-left">Amount</th>
+                <th className="py-2 px-3 text-left">Room Count</th>
             </tr>
-          </thead>
-          <tbody className="text-gray-600 text-sm font-light">
+            </thead>
+            <tbody className="text-gray-600 text-sm font-light">
             {hotelOrders.length === 0 ? (
-              <tr>
+                <tr>
                 <td colSpan="8" className="py-3 px-3 text-center">No Orders Found</td>
-              </tr>
-            ) : (
-              hotelOrders.map((order) => (
-                <tr
-                  className="border-b border-gray-200 hover-bg-gray-100"
-                  key={order._id}
-                >
-                  <td className="py-3 px-3 text-left">{order?.razorpay?.orderId}</td>
-                  <td className="py-3 px-3 text-left">{order?.OrderData?.name}</td>
-                  <td className="py-3 px-3 text-left">{order?.OrderData?.checkin}</td>
-                  <td className="py-3 px-3 text-left">{order?.OrderData?.checkout}</td>
-                  <td className="py-3 px-3 text-left">{categoryNames[order._id]?.categoryName}</td>
-                  <td className="py-3 px-3 text-left">{categoryNames[order._id]?.subcategoryName}</td>
-                  <td className="py-3 px-3 text-left">{order?.amount}</td>
-                  <td className="py-3 px-3 text-left">{order?.OrderData?.roomCount}</td>
                 </tr>
-              ))
+            ) : (
+                hotelOrders.map((order) => (
+                <tr
+                    className="border-b border-gray-200 hover-bg-gray-100"
+                    key={order._id}
+                >
+                    <td className="py-3 px-3 text-left"> {order?.razorpay?.orderId}</td>
+                    <td className="py-3 px-3 text-left">{order?.OrderData?.name}</td>
+                    <td className="py-3 px-3 text-left">{order?.OrderData?.checkin}</td>
+                    <td className="py-3 px-3 text-left">{order?.OrderData?.checkout}</td>
+                    <td className="py-3 px-3 text-left">{categoryNames[order._id]?.categoryName}</td>
+                    <td className="py-3 px-3 text-left">{categoryNames[order._id]?.subcategoryName}</td>
+                    <td className="py-3 px-3 text-left">{order?.amount}</td>
+                    <td className="py-3 px-3 text-left">{order?.OrderData?.roomCount}</td>
+                </tr>
+                ))
             )}
-          </tbody>
+            </tbody>
         </table>
+     </div>
+
       </div>
     </div>
   );
