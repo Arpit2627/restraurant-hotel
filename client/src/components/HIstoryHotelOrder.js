@@ -71,8 +71,8 @@ const HistoryHotelOrder = () => {
       <div className="col-md-3" style={{ width: "378px", marginLeft: "22px" }}>
       </div>
       <div className="col-md-8">
-        <h1 className="text-center">Your Hotel Orders</h1>
-        <table className="min-w-full table-auto">
+      <h1 className="text-center mb-4">Your Hotel Orders</h1>
+<table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-2 px-3 text-left">Order ID</th>
